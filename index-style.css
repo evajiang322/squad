@@ -13,6 +13,7 @@ body {
   padding: 50px;
 }*/
 
+
 #canvas {
     z-index:-1;
     margin-left:20px;
@@ -59,11 +60,13 @@ body {
   margin-top:-10px;
 }
 
-#gameRules{
+#aboutGame, #gameRules{
 
   position:absolute;
   margin-left:530px;
   margin-top:230px;
+  font-size:16pt;
+  width:50%;
 }
 
 #goToGame{
@@ -77,7 +80,7 @@ body {
 }
 
 #rules{
-background-color: #990000;
+  background-color: #990000;
   margin-top:300px;
 }
 
@@ -126,5 +129,13 @@ h2{
   color: blue;
   margin-top:90px;
   margin-left:10px;
+
+}
+
+h3{
+  text-decoration: underline;
+  font-weight: bold;
+  font-size:48pt;
+
 
 }
