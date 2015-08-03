@@ -26,7 +26,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 class User(ndb.Model):
-    name = ndb.UserProperty()
+    name = ndb.StringProperty()
     points = ndb.IntegerProperty(required=True)
 #
 # class Score(ndb.Model):
@@ -34,21 +34,20 @@ class User(ndb.Model):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        user_query = user_query.order()
+        user_query = User.query()
+        user_query = user_query.order(-User.points)
         user_data = user_query.fetch(10)
         template_values = {
-            'leaders' : user_data
+            'users' : user_data
         }
         template = JINJA_ENVIRONMENT.get_template('index.html')
         self.response.write(template.render(template_values))
 
     def post(self):
-        # my_lunchbox_key = lunchbox_instance.put()
 
         name = self.request.get('name')
         points = self.request.get('points')
-        # Create a new Student and put it in the datastore
-        user = User(name=name, points=points)
+        user = User(name=name, points=int(points))
         user_key = user.put()
         self.redirect('/')
 
