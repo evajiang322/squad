@@ -43,7 +43,7 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_values))
 
     def post(self):
-        my_lunchbox_key = lunchbox_instance.put()
+        # my_lunchbox_key = lunchbox_instance.put()
 
         name = self.request.get('name')
         points = self.request.get('points')
