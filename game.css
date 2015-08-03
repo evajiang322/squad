@@ -4,19 +4,14 @@
 
 body {
     height:100%;
+    background-color:black;
+    color:white;
   }
 
 /*div{
   border-style: solid;
   padding: 50px;
 }*/
-
-body{
-  /*text-align: center;*/
-  background-color:black;
-  color:white;
-
-}
 
 #canvas {
     z-index:-1;
@@ -34,6 +29,43 @@ body{
   margin-top:-40px;
   width:500px;
   z-index:-1;
+}
+
+#aboutPaul{
+  background-color: #FF0066;
+  margin-left:400px;
+}
+
+#aboutPaul:hover{
+  margin-top:-10px;
+}
+
+#aboutEva{
+  background-color: #E6E65C;
+  margin-left:450px;
+}
+
+#aboutEva:hover{
+  margin-top:-10px;
+}
+
+#aboutNicole{
+  background-color: #3399FF;
+  margin-left:500px;
+}
+
+#aboutNicole:hover{
+  margin-top:-10px;
+}
+
+div{
+  position:fixed;
+  border-radius: 10px;
+  margin-top:-30px;
+  padding: 10px;
+  padding-top:100px;
+  color:white;
+  width:15px;
 }
 
 h2{
