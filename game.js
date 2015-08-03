@@ -3,6 +3,25 @@
 //     $("#testbox").html(event.which);
 //   });
 
+//Checks the state of the game.
+//This is just for aesthetics
+
+
+var isPaused = true;
+
+$("#pauseResumeGame").click(function()
+{
+  if(isPaused)
+    $("#pauseResume").html("Resume");
+  else {
+    $("#pauseResume").html("Pause");
+  }
+  isPaused = !isPaused;
+
+});
+
+
+// vvvvvvv Canvasing begins here vvvvvvv
 var c = document.getElementById("canvas");
 var ctx = c.getContext("2d");
 

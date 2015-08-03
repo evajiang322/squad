@@ -2,7 +2,6 @@ $(function(){
 
   $("#gameRules").hide();
   var gameRulesView = false;
-  var aboutGameView = true;
 
   $("#rules").click(function(){
 
