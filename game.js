@@ -18,10 +18,10 @@ $("canvas").click(function generateRandomBubble(){
   //so the program knows which letters to check for to delete
   letters_to_delete.push(random_letter);
 
-  //drawing the circle thing
+  //picking random coordinates
   var centerx = Math.floor(Math.random() * (canvas.width - 10 + 1)) + 10;
   var centery = Math.floor(Math.random() * (canvas.height - 10 + 1)) + 10;
-  // var bubbleSize = 10;
+  //drawing the circle thing
   ctx.beginPath();
   ctx.arc(centerx+3, centery-4, 10, 0, 2 * Math.PI);
   ctx.fillText(random_letter, centerx , centery);
@@ -29,7 +29,10 @@ $("canvas").click(function generateRandomBubble(){
 });
 
 $(document).keydown(function(event){
-  console.log(event.which);
+  //this gets the keycode and converts the number to a lowercase letter
+  keynum = event.which;
+  letter_pressed = String.fromCharCode(keynum).toLowerCase();
+  console.log(letter_pressed);
 
 });
 
