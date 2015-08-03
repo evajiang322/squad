@@ -14,11 +14,43 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import os
 import webapp2
+import jinja2
+from google.appengine.ext import ndb
+
+
+JINJA_ENVIRONMENT = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
+
+class User(ndb.Model):
+    name = ndb.UserProperty()
+    points = ndb.IntegerProperty(required=True)
+#
+# class Score(ndb.Model):
+#     points = ndb.IntegerProperty(required=True)
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        user_query = user_query.order()
+        user_data = user_query.fetch(10)
+        template_values = {
+            'leaders' : user_data
+        }
+        template = JINJA_ENVIRONMENT.get_template('index.html')
+        self.response.write(template.render(template_values))
+
+    def post(self):
+        # my_lunchbox_key = lunchbox_instance.put()
+
+        name = self.request.get('name')
+        points = self.request.get('points')
+        # Create a new Student and put it in the datastore
+        user = User(name=name, points=points)
+        user_key = user.put()
+        self.redirect('/')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
