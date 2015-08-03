@@ -42,7 +42,7 @@ body {
 }
 
 #aboutEva{
-  background-color: #E6E65C;
+  background-color: #66FF66;
   margin-left:450px;
 }
 
@@ -59,7 +59,46 @@ body {
   margin-top:-10px;
 }
 
-div{
+#gameRules{
+
+  position:absolute;
+  margin-left:530px;
+  margin-top:230px;
+}
+
+#goToGame{
+  background-color: orange;
+  margin-top:370px;
+}
+
+#goToGame:hover{
+  background-color:yellow;
+  margin-left:-20px;
+}
+
+#rules{
+background-color: #990000;
+  margin-top:300px;
+}
+
+#rules:hover{
+  background-color: #FF0000;
+  margin-left:-20px;
+
+}
+
+#scoreboard{
+background-color: #CC00FF;
+  margin-top:440px;
+
+}
+
+#scoreboard:hover{
+  background-color: #FF0066;
+  margin-left:-20px;
+}
+
+.abouts{
   position:fixed;
   border-radius: 10px;
   margin-top:-30px;
@@ -69,9 +108,23 @@ div{
   width:15px;
 }
 
+.sidetabs{
+  font-size: 24pt;
+  background-color:red;
+  text-align:right;
+  position:fixed;
+  border-radius: 10px;
+  margin-left:-100px;
+  padding: 5px;
+  padding-left:200px;
+  color:white;
+  width:200px;
+}
+
 h2{
   position:fixed;
   color: blue;
   margin-top:90px;
+  margin-left:10px;
 
 }
