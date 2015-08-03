@@ -13,6 +13,7 @@ var y_coord = [];
 
 
 $("canvas").click(function generateRandomBubble(){
+  // console.log("Im clicked");
   //getting a random index number to get a random letter from alphabet
   var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
   index = index % alphabet.length;
@@ -24,12 +25,17 @@ $("canvas").click(function generateRandomBubble(){
 
   //so the program knows which letters to check for to delete and its coordinates
   letters_to_delete.push(random_letter);
+  // console.log(letters_to_delete);
   x_coord.push(centerx);
   y_coord.push(centery);
+  // console.log(x_coord);
+  // console.log(y_coord);
 
   //drawing the circle thing
   ctx.beginPath();
   ctx.arc(centerx+3, centery-4, 10, 0, 2 * Math.PI);
+  ctx.strokeStyle = "black";
+  ctx.fillStyle = "black";
   ctx.fillText(random_letter, centerx , centery);
   ctx.stroke();
 });
@@ -52,7 +58,7 @@ $(document).keydown(function(event){
       letters_to_delete.splice(i, 1);
       x_coord.splice(i, 1);
       y_coord.splice(i, 1);
-      break;
+      i--;
     }
   }
 
