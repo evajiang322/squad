@@ -1,7 +1,3 @@
-// $(function(){
-//   $("body").keydown(function(event){
-//     $("#testbox").html(event.which);
-//   });
 
 var c = document.getElementById("canvas");
 var ctx = c.getContext("2d");
@@ -61,8 +57,4 @@ $(document).keydown(function(event){
       i--;
     }
   }
-
 });
-
-
-// });
