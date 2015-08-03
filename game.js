@@ -3,28 +3,27 @@ $(function(){
     $("#testbox").html(event.which);
   });
 
-  var c = document.getElementById("canvas");
-  var ctx = c.getContext("2d");
+var c = document.getElementById("canvas");
+var ctx = c.getContext("2d");
 //   ctx.font = "20px Georgia";
 
 //Furthest Coordinates for the canvas = (500,375)
+var alphabet = ["a","b","c","d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var letters_to_delete = [];
 
 
 $("canvas").click(function generateRandomBubble(){
-  var ranNum1 = Math.random()*500;
-  var ranNum2 = Math.random()*375;
-  var num = ranNum1;
-  var num2 = ranNum2;
-  var bubbleSize = 10;
-  ctx.fillText("w", num , num2);
+  var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
+  index = index % alphabet.length;
+  var random_letter = alphabet[index];
+  var centerx = Math.floor(Math.random() * (canvas.width - 10 + 1)) + 10;
+  var centery = Math.floor(Math.random() * (canvas.height - 10 + 1)) + 10;
+  // var bubbleSize = 10;
+  ctx.fillText(random_letter, centerx , centery);
   ctx.beginPath();
-  ctx.arc(num+4, num2-4, bubbleSize, 0, 2 * Math.PI);
+  ctx.arc(centerx+4, centery-4, 10, 0, 2 * Math.PI);
   ctx.stroke();
 });
-
-
-
-
 
 
 });
