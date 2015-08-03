@@ -13,8 +13,9 @@ body {
 
 body{
   /*text-align: center;*/
-  /*background-color:black;
-  color:white;*/
+  background-color:black;
+  color:white;
+
 }
 
 #canvas {
@@ -27,8 +28,17 @@ body{
     height:45%;
   }
 
+#cloudPic{
+  position:fixed;
+  margin-left:-199px;
+  margin-top:-40px;
+  width:500px;
+  z-index:-1;
+}
+
 h2{
-  text-align:center;
-  /*color: white;*/
+  position:fixed;
+  color: blue;
+  margin-top:90px;
 
 }
