@@ -2,9 +2,8 @@
 //Checks the state of the game.
 //This is just for aesthetics
 
-<<<<<<< HEAD
+
 var score_value = 0;
-=======
 //for scope issues
 var generating = 0;
 
@@ -14,7 +13,6 @@ $("#startButtonPic").click(function(){
 });
 
 //pause and resume button.
->>>>>>> b81956fb7563cf0364023aafaa92699c49d83270
 var isPaused = true;
 
 $("#pauseResumeGame").click(function(){
@@ -115,12 +113,3 @@ $(document).keydown(function(event){
 });
 
 $("#score_val").html(score_value);
-
-//calling the function generateRandomBubble continuously over timed intervals; put this into the start button/resume button
-setInterval(function (){generateRandomBubble()}, 1000);
-
-//stopping the circles from generating --> put the second part into pause button
-// var generating = setInterval(function (){generateRandomBubble()}, 1000);
-// clearInterval(generating);
-=======
->>>>>>> b81956fb7563cf0364023aafaa92699c49d83270
