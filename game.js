@@ -16,6 +16,10 @@ $("#pauseResumeGame").click(function(){
 });
 
 
+$("#startButtonPic").click(function(){
+  $("#startButtonPic").hide();
+});
+
 // vvvvvvv Canvasing begins here vvvvvvv
 var c = document.getElementById("canvas");
 var ctx = c.getContext("2d");

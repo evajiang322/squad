@@ -8,7 +8,6 @@ a {
 }
 
 body {
-    height:100%;
   background-color:black;
   color:white;
 }
@@ -48,6 +47,16 @@ body {
 
 #pauseResumeGame:hover{
   cursor:pointer;
+}
+
+#startButtonPic{
+  margin-left: 410px;
+  margin-top: 2px;
+  height:500px;
+  width:900px;
+  z-index:0;
+  width:60%;
+  position:absolute;
 }
 
 
