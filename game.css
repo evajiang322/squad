@@ -50,13 +50,12 @@ body {
 }
 
 #startButtonPic{
-  margin-left: 410px;
-  margin-top: 2px;
-  height:500px;
-  width:900px;
+  margin-left: 400px;
+  margin-top: 0px;
+  height:530px;
   z-index:0;
-  width:60%;
-  position:absolute;
+  width:830px;
+  position:fixed;
 }
 
 
