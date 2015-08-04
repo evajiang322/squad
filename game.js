@@ -8,6 +8,7 @@ var isPaused = true;
 $("#pauseResumeGame").click(function(){
   if(isPaused){
     $("#pauseResume").html("Resume");
+    clearInterval(generating);
   }else{
     $("#pauseResume").html("Pause");
   }
@@ -93,5 +94,4 @@ $(document).keydown(function(event){
 setInterval(function (){generateRandomBubble()}, 1000);
 
 //stopping the circles from generating --> put the second part into pause button
-// var generating = setInterval(function (){generateRandomBubble()}, 1000);
-// clearInterval(generating);
+var generating = setInterval(function (){generateRandomBubble()}, 1000);
