@@ -9,10 +9,11 @@
 var score_value = 0;
 var generating = 0;
 var startBtnPressed = false;
+var isGameOver = false;
 var countdownTimer = 0;
 
 // countdown timer
-var seconds = 59;
+var seconds = 3;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -21,8 +22,12 @@ function secondPassed() {
     }
     document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
     if (seconds == 0) {
+        clearInterval(generating);
         clearInterval(countdownTimer);
         document.getElementById('countdown').innerHTML = "Time's Up!";
+        $("#gameOverPic").show();
+        isGameOver = true;
+
     } else {
         seconds--;
     }
@@ -40,7 +45,7 @@ $("#startButtonPic").click(function(){
 //pause and resume button.
 var isPaused = true;
 $("#pauseResumeGame").click(function(){
-  if(startBtnPressed){
+  if(startBtnPressed && !isGameOver){
     if(isPaused){
       $("#pauseResume").html("Resume");
       $("#paused").show();
