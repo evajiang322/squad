@@ -75,7 +75,7 @@ $(document).keydown(function(event){
   //deleting. aka drawing over the thing.
   for (var i = 0; i < letters_to_delete.length; i++){
     if (letters_to_delete[i] === letter_pressed){
-      score_value += 100;
+      score_value = score_value + 100;
       $("#score_val").html(score_value);
       ctx.beginPath();
       ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
@@ -103,6 +103,7 @@ $(document).keydown(function(event){
   }
 });
 
+$("#score_val").html(score_value);
 
 //calling the function generateRandomBubble continuously over timed intervals; put this into the start button/resume button
 setInterval(function (){generateRandomBubble()}, 1000);
