@@ -1,6 +1,7 @@
 
 //Checks the state of the game.
 //This is just for aesthetics
+  $("#paused").hide();
 
 
 var score_value = 0;
@@ -19,9 +20,11 @@ $("#pauseResumeGame").click(function(){
   if(isPaused){
     $("#pauseResume").html("Resume");
     clearInterval(generating);
+    $("#paused").show();
   }else{
     $("#pauseResume").html("Pause");
     generating = setInterval(function (){generateRandomBubble()}, 1000);
+    $("#paused").hide();
   }
   isPaused = !isPaused;
 });
