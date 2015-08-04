@@ -42,7 +42,7 @@ class MainHandler(webapp2.RequestHandler):
         template_params['users'] = user_data
         template_params['points'] = points
 
-        template = JINJA_ENVIRONMENT.get_template('scoreboard.html')
+        template = JINJA_ENVIRONMENT.get_template('index.html')
         self.response.write(template.render(template_params))
 
     def post(self):
