@@ -34,7 +34,7 @@ class User(ndb.Model):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        points =[999, 980]
+        points = [999, 980]
         user_query = User.query()
         # user_query = user_query.order(-User.points)
         user_data = user_query.fetch(10)
@@ -66,7 +66,7 @@ class ScoreboardHandler(webapp2.RequestHandler):
         user_data = user_query.fetch(10)
         template_params = {}
         template_params['users'] = user_data
-        template_params['points'] = points
+        # template_params['points'] = points
 
         template = JINJA_ENVIRONMENT.get_template('scoreboard.html')
         self.response.write(template.render(template_params))
@@ -76,8 +76,8 @@ class ScoreboardHandler(webapp2.RequestHandler):
         # points = self.request.get('points')
         # user = User(name=name, points=int(points))
         user = User(name=name)
-        user_key = user.put()
-        self.redirect('/')
+        user.put()
+        self.redirect('/scoreboard.html')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),

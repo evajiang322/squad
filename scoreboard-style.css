@@ -18,6 +18,7 @@ table{
   background-color: #BEF243;
   padding:5px;
   color:white;
+  width:300px;
 }
 
 
@@ -25,4 +26,5 @@ table{
   background-color: #FF6AA6;
   padding:5px;
   color: black;
+  width:300px;
 }

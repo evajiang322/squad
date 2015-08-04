@@ -13,15 +13,14 @@
     <TABLE BORDER="3" CELLSPACING="1" CELLPADDING="1">
     <h2>Scores</h2>
     <tr>
-    <td id="">  {% for user in users %}
-      <ul id = "placedUserName">{{ user.name }}
+    <td>  {% for user in users %}
+      <ul id = "placedUserName"> {{ user.name }}
       </ul>
     {% endfor %}
   </TD>
     <td>
       {% for n in points:%}
-      <ul id = "placedScore">{{ n }}
-      </ul>
+      <ul id = "placedScore"> {{ n }} </ul>
       {% endfor %}
       </td>
   </TD>
