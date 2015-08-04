@@ -76,6 +76,7 @@ $(document).keydown(function(event){
   for (var i = 0; i < letters_to_delete.length; i++){
     if (letters_to_delete[i] === letter_pressed){
       score_value += 100;
+      $("#score_val").html(score_value);
       ctx.beginPath();
       ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
       ctx.fillStyle = "lavender";
@@ -91,17 +92,17 @@ $(document).keydown(function(event){
       return;
       // i--;
       }
-    else {
+    else if(letters_to_delete[i] !== letter_pressed) {
       score_value -= 200;
-      if(score_value <= 0)
-      score_value = 0;
+      if(score_value <= 0){
+        score_value = 0;
+      }
+      $("#score_val").html(score_value);
     }
 
   }
 });
 
-
-$("#score_val").html(score_value);
 
 //calling the function generateRandomBubble continuously over timed intervals; put this into the start button/resume button
 setInterval(function (){generateRandomBubble()}, 1000);
