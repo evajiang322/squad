@@ -33,6 +33,14 @@ body {
   z-index:-1;
 }
 
+#cloudPic:hover{
+  position:fixed;
+  margin-left:-179px;
+  margin-top:-30px;
+  width:500px;
+  z-index:-1;
+}
+
 #aboutPaul{
   background-color: #FF0066;
   margin-left:400px;
