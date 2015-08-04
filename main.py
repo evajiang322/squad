@@ -49,6 +49,7 @@ class GameHandler(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('game.html')
         self.response.write(template.render())
+        
 
 class ScoreboardHandler(webapp2.RequestHandler):
     def get(self):
@@ -69,7 +70,7 @@ class ScoreboardHandler(webapp2.RequestHandler):
         # user = User(name=name, points=int(points))
         user = User(name=name)
         user.put()
-        self.redirect('/scoreboard.html')
+        self.redirect('/scoreboard')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
