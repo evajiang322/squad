@@ -15,7 +15,7 @@ var countdownTimer = 0;
 // var bubbleRemoval = 0;
 
 // countdown timer
-var seconds = 3;
+var seconds = 59;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
