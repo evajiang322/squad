@@ -2,7 +2,7 @@
 //Checks the state of the game.
 //This is just for aesthetics
 
-
+var score_value = 0;
 var isPaused = true;
 
 $("#pauseResumeGame").click(function(){
@@ -75,6 +75,7 @@ $(document).keydown(function(event){
   //deleting. aka drawing over the thing.
   for (var i = 0; i < letters_to_delete.length; i++){
     if (letters_to_delete[i] === letter_pressed){
+      score_value += 100;
       ctx.beginPath();
       ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
       ctx.fillStyle = "lavender";
@@ -89,9 +90,18 @@ $(document).keydown(function(event){
       //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
       return;
       // i--;
+      }
+    else {
+      score_value -= 200;
+      if(score_value <= 0)
+      score_value = 0;
     }
+
   }
 });
+
+
+$("#score_val").html(score_value);
 
 //calling the function generateRandomBubble continuously over timed intervals; put this into the start button/resume button
 setInterval(function (){generateRandomBubble()}, 1000);
