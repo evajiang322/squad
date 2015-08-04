@@ -2,7 +2,15 @@
 //Checks the state of the game.
 //This is just for aesthetics
 
+//for scope issues
+var generating = 0;
 
+$("#startButtonPic").click(function(){
+  $("#startButtonPic").hide();
+  generating = setInterval(function (){generateRandomBubble()}, 1000);
+});
+
+//pause and resume button.
 var isPaused = true;
 
 $("#pauseResumeGame").click(function(){
@@ -11,15 +19,13 @@ $("#pauseResumeGame").click(function(){
     clearInterval(generating);
   }else{
     $("#pauseResume").html("Pause");
+    generating = setInterval(function (){generateRandomBubble()}, 1000);
   }
   isPaused = !isPaused;
-
 });
 
 
-$("#startButtonPic").click(function(){
-  $("#startButtonPic").hide();
-});
+
 
 // vvvvvvv Canvasing begins here vvvvvvv
 var c = document.getElementById("canvas");
@@ -93,9 +99,3 @@ $(document).keydown(function(event){
     }
   }
 });
-
-//calling the function generateRandomBubble continuously over timed intervals; put this into the start button/resume button
-setInterval(function (){generateRandomBubble()}, 1000);
-
-//stopping the circles from generating --> put the second part into pause button
-var generating = setInterval(function (){generateRandomBubble()}, 1000);
