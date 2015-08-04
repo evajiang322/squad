@@ -19,22 +19,21 @@ $("#startButtonPic").click(function(){
 });
 
 //pause and resume button.
-  var isPaused = true;
-  $("#pauseResumeGame").click(function(){
-    if(startBtnPressed){
-      if(isPaused){
-        $("#pauseResume").html("Resume");
-        $("#paused").show();
-        clearInterval(generating);
-      }else{
-        $("#pauseResume").html("Pause");
-        generating = setInterval(function (){generateRandomBubble()}, 1000);
-        $("#paused").hide();
-      }
-      isPaused = !isPaused;
+var isPaused = true;
+$("#pauseResumeGame").click(function(){
+  if(startBtnPressed){
+    if(isPaused){
+      $("#pauseResume").html("Resume");
+      $("#paused").show();
+      clearInterval(generating);
+    }else{
+      $("#pauseResume").html("Pause");
+      generating = setInterval(function (){generateRandomBubble()}, 1000);
+      $("#paused").hide();
     }
-  });
-
+    isPaused = !isPaused;
+  }
+});
 
 
 // vvvvvvv Canvasing begins here vvvvvvv
@@ -110,7 +109,7 @@ $(document).keydown(function(event){
         return;
         // i--;
       }
-      else if(i === letters_to_delete.length - 1 && i !== letter_pressed) {
+      else if(i === letters_to_delete.length - 1 && i !== letter_pressed){
         score_value -= 200;
         if(score_value <= 0){
           score_value = 0;
