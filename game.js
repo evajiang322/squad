@@ -75,27 +75,29 @@ function generateRandomBubble(){
 
 
 $(document).keydown(function(event){
-  //this gets the keycode and converts the number to a lowercase letter
-  keynum = event.which;
-  letter_pressed = String.fromCharCode(keynum).toLowerCase();
-  // console.log(letter_pressed);
-  //deleting. aka drawing over the thing.
-  for (var i = 0; i < letters_to_delete.length; i++){
-    if (letters_to_delete[i] === letter_pressed){
-      ctx.beginPath();
-      ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
-      ctx.fillStyle = "lavender";
-      ctx.strokeStyle = "lavender";
-      ctx.fill();
-      ctx.stroke();
+  if (isPaused){
+    //this gets the keycode and converts the number to a lowercase letter
+    keynum = event.which;
+    letter_pressed = String.fromCharCode(keynum).toLowerCase();
+    // console.log(letter_pressed);
+    //deleting. aka drawing over the thing.
+    for (var i = 0; i < letters_to_delete.length; i++){
+      if (letters_to_delete[i] === letter_pressed){
+        ctx.beginPath();
+        ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
+        ctx.fillStyle = "lavender";
+        ctx.strokeStyle = "lavender";
+        ctx.fill();
+        ctx.stroke();
 
-      letters_to_delete.splice(i, 1);
-      x_coord.splice(i, 1);
-      y_coord.splice(i, 1);
+        letters_to_delete.splice(i, 1);
+        x_coord.splice(i, 1);
+        y_coord.splice(i, 1);
 
-      //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
-      return;
-      // i--;
+        //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
+        return;
+        // i--;
+      }
     }
   }
 });
