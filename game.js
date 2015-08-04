@@ -2,23 +2,34 @@
 //Checks the state of the game.
 //This is just for aesthetics
 
+<<<<<<< HEAD
 var score_value = 0;
+=======
+//for scope issues
+var generating = 0;
+
+$("#startButtonPic").click(function(){
+  $("#startButtonPic").hide();
+  generating = setInterval(function (){generateRandomBubble()}, 1000);
+});
+
+//pause and resume button.
+>>>>>>> b81956fb7563cf0364023aafaa92699c49d83270
 var isPaused = true;
 
 $("#pauseResumeGame").click(function(){
   if(isPaused){
     $("#pauseResume").html("Resume");
+    clearInterval(generating);
   }else{
     $("#pauseResume").html("Pause");
+    generating = setInterval(function (){generateRandomBubble()}, 1000);
   }
   isPaused = !isPaused;
-
 });
 
 
-$("#startButtonPic").click(function(){
-  $("#startButtonPic").hide();
-});
+
 
 // vvvvvvv Canvasing begins here vvvvvvv
 var c = document.getElementById("canvas");
@@ -111,3 +122,5 @@ setInterval(function (){generateRandomBubble()}, 1000);
 //stopping the circles from generating --> put the second part into pause button
 // var generating = setInterval(function (){generateRandomBubble()}, 1000);
 // clearInterval(generating);
+=======
+>>>>>>> b81956fb7563cf0364023aafaa92699c49d83270

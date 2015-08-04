@@ -27,27 +27,30 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class User(ndb.Model):
     name = ndb.StringProperty()
-    points = ndb.IntegerProperty(required=True)
+    # points = ndb.IntegerProperty(required=False)
 #
 # class Score(ndb.Model):
 #     points = ndb.IntegerProperty(required=True)
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        points =[999, 980]
         user_query = User.query()
-        user_query = user_query.order(-User.points)
+        # user_query = user_query.order(-User.points)
         user_data = user_query.fetch(10)
-        template_values = {
-            'users' : user_data
-        }
+        template_params = {}
+        template_params['users'] = user_data
+        template_params['points'] = points
+
         template = JINJA_ENVIRONMENT.get_template('index.html')
-        self.response.write(template.render(template_values))
+        self.response.write(template.render(template_params))
 
     def post(self):
 
         name = self.request.get('name')
-        points = self.request.get('points')
-        user = User(name=name, points=int(points))
+        # points = self.request.get('points')
+        # user = User(name=name, points=int(points))
+        user = User(name=name)
         user_key = user.put()
         self.redirect('/')
 
