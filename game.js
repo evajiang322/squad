@@ -37,12 +37,12 @@ function generateRandomBubble(){
   var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
   var centery = Math.floor(Math.random() * ((canvas.height - 26) - 26 + 1)) + 26;
 
-  // //checking to make sure that the coordinates won't overlap each other
-  // for (i=0; i< x_coord.length;i++){
-  //   if (Math.abs(centerx - x_coord[i]) <= 25 && Math.abs(centery - y_coord) <= 25){
-  //     break;
-  //   }
-  // }
+  //checking to make sure that the coordinates won't overlap each other
+  for (i=0; i< x_coord.length;i++){
+    if (Math.abs(centerx - x_coord[i]) <= 50 && Math.abs(centery - y_coord[i]) <= 50){
+      return;
+    }
+  }
 
   //so the program knows which letters to check for to delete and its coordinates
   letters_to_delete.push(random_letter);
