@@ -5,11 +5,10 @@
 
 var isPaused = true;
 
-$("#pauseResumeGame").click(function()
-{
-  if(isPaused)
+$("#pauseResumeGame").click(function(){
+  if(isPaused){
     $("#pauseResume").html("Resume");
-  else {
+  }else{
     $("#pauseResume").html("Pause");
   }
   isPaused = !isPaused;
@@ -27,7 +26,7 @@ var x_coord = [];
 var y_coord = [];
 
 
-$("canvas").click(function generateRandomBubble(){
+function generateRandomBubble(){
   // console.log("Im clicked");
   //getting a random index number to get a random letter from alphabet
   var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
@@ -38,15 +37,22 @@ $("canvas").click(function generateRandomBubble(){
   var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
   var centery = Math.floor(Math.random() * ((canvas.height - 26) - 26 + 1)) + 26;
 
+  // //checking to make sure that the coordinates won't overlap each other
+  // for (i=0; i< x_coord.length;i++){
+  //   if (Math.abs(centerx - x_coord[i]) <= 25 && Math.abs(centery - y_coord) <= 25){
+  //     break;
+  //   }
+  // }
+
   //so the program knows which letters to check for to delete and its coordinates
   letters_to_delete.push(random_letter);
-  // console.log(letters_to_delete);
   x_coord.push(centerx);
   y_coord.push(centery);
+  // console.log(letters_to_delete);
   // console.log(x_coord);
   // console.log(y_coord);
 
-  //drawing the circle thing
+  //drawing the circle
   ctx.beginPath();
   ctx.arc(centerx+3, centery-4, 25, 0, 2 * Math.PI);
   ctx.strokeStyle = "black";
@@ -54,7 +60,8 @@ $("canvas").click(function generateRandomBubble(){
   ctx.font = "20px serif";
   ctx.fillText(random_letter, centerx , centery);
   ctx.stroke();
-});
+}
+
 
 $(document).keydown(function(event){
   //this gets the keycode and converts the number to a lowercase letter
@@ -78,3 +85,10 @@ $(document).keydown(function(event){
     }
   }
 });
+
+//calling the function generateRandomBubble continuously over timed intervals; put this into the start button/resume button
+setInterval(function (){generateRandomBubble()}, 1000);
+
+//stopping the circles from generating --> put the second part into pause button
+// var generating = setInterval(function (){generateRandomBubble()}, 1000);
+// clearInterval(generating);
