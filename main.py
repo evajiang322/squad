@@ -81,6 +81,6 @@ class ScoreboardHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/scoreboard.html', ScoreboardHandler)
+    ('/scoreboard.html', ScoreboardHandler),
     ('/game', GameHandler)
 ], debug=True)
