@@ -17,9 +17,9 @@ handlers:
   static_files: index-script.js
   upload: index-script\.js
 
-  - url: /scoreboard\.html
-    static_files: scoreboard.html
-    upload: scoreboard\.html
+  # - url: /scoreboard\.html
+  #   static_files: scoreboard.html
+  #   upload: scoreboard\.html
 
 - url: .*
   script: main.app
