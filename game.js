@@ -11,6 +11,8 @@ var generating = 0;
 var startBtnPressed = false;
 var isGameOver = false;
 var countdownTimer = 0;
+// var countdownBubble = 0;
+// var bubbleRemoval = 0;
 
 // countdown timer
 var seconds = 3;
@@ -38,8 +40,10 @@ function secondPassed() {
 $("#startButtonPic").click(function(){
   $("#startButtonPic").hide();
   startBtnPressed = true;
-  generating = setInterval(function (){generateRandomBubble()}, 1000);
+  generating = setInterval('generateRandomBubble()', 1000);
   countdownTimer = setInterval('secondPassed()', 1000);
+  // countdownBubble = setInterval('decrease_btime()', 1000);
+  // bubbleRemoval = setInterval('bubble_removal()', 1000);
 });
 
 //pause and resume button.
@@ -51,10 +55,14 @@ $("#pauseResumeGame").click(function(){
       $("#paused").show();
       clearInterval(generating);
       clearInterval(countdownTimer);
+      // clearInterval(countdownBubble);
+      // clearInterval(bubbleRemoval);
     }else{
       $("#pauseResume").html("Pause");
-      generating = setInterval(function (){generateRandomBubble()}, 1000);
+      generating = setInterval('generateRandomBubble()', 1000);
       countdownTimer = setInterval('secondPassed()', 1000);
+      // countdownBubble = setInterval('decrease_btime()', 1000);
+      // removeTimer = setInterval('remove_bubble()', 1000);
       $("#paused").hide();
     }
     isPaused = !isPaused;
@@ -70,6 +78,7 @@ var alphabet = ["a","b","c","d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
 var letters_to_delete = [];
 var x_coord = [];
 var y_coord = [];
+var bubble_time = [];
 
 
 function generateRandomBubble(){
@@ -94,9 +103,8 @@ function generateRandomBubble(){
   letters_to_delete.push(random_letter);
   x_coord.push(centerx);
   y_coord.push(centery);
-  // console.log(letters_to_delete);
-  // console.log(x_coord);
-  // console.log(y_coord);
+  // bubble_time.push(5);
+
 
   //drawing the circle
   ctx.beginPath();
@@ -133,7 +141,6 @@ $(document).keydown(function(event){
 
         //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
         return;
-        // i--;
       }
       else if(i === letters_to_delete.length - 1 && i !== letter_pressed){
         score_value -= 200;
@@ -147,3 +154,31 @@ $(document).keydown(function(event){
 });
 
 $("#score_val").html(score_value);
+
+//counting down the seconds for each bubble
+// function decrease_btime(){
+//   for (i = 0; i< bubble_time.length; i++){
+//     bubble_time[i] -= 1;
+//   }
+//   console.log(bubble_time);
+// }
+
+
+//removing the bubbles that has reached 0 in its own timer
+// function bubble_removal(){
+//   for (i=0; i<3; i++){
+//     if (bubble_time[i] === 0){
+//       ctx.beginPath();
+//       ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
+//       ctx.fillStyle = "lavender";
+//       ctx.strokeStyle = "lavender";
+//       ctx.fill();
+//       ctx.stroke();
+//
+//       letters_to_delete.splice(i, 1);
+//       x_coord.splice(i, 1);
+//       y_coord.splice(i, 1);
+//       bubble_time.splice(i, 1);
+//     }
+//   }
+// }
