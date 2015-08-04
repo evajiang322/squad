@@ -12,7 +12,7 @@ var startBtnPressed = false;
 var countdownTimer = 0;
 
 // countdown timer
-var seconds = 60;
+var seconds = 59;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -22,7 +22,7 @@ function secondPassed() {
     document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
     if (seconds == 0) {
         clearInterval(countdownTimer);
-        document.getElementById('countdown').innerHTML = "Time's Up";
+        document.getElementById('countdown').innerHTML = "Time's Up!";
     } else {
         seconds--;
     }
@@ -35,7 +35,6 @@ $("#startButtonPic").click(function(){
   startBtnPressed = true;
   generating = setInterval(function (){generateRandomBubble()}, 1000);
   countdownTimer = setInterval('secondPassed()', 1000);
-
 });
 
 //pause and resume button.
