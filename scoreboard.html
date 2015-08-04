@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 {% autoescape true %}
 <html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="scoreboard-style.css" />
+  </head>
   <body>
     <form action="/" method="post">
       <div>Name: <input name="name"></input></div>
       <div><input type="submit" value="Add User"></div>
     </form>
+    <hr />
     <TABLE BORDER="3" CELLSPACING="1" CELLPADDING="1">
-    <CAPTION>Scores</CAPTION>
-    <TR>
-    <TD ALIGN = "left" bgcolor="#FF0000" >  {% for user in users %}
-      <ul>{{ user.name }}
+    <h2>Scores</h2>
+    <tr>
+    <td id="">  {% for user in users %}
+      <ul id = "placedUserName">{{ user.name }}
       </ul>
     {% endfor %}
   </TD>
     <td>
       {% for n in points:%}
-      <ul>{{ n }}
+      <ul id = "placedScore">{{ n }}
       </ul>
       {% endfor %}
       </td>
   </TD>
     </TR>
     </TABLE>
-
-
-    <hr>
 
   </body>
 </html>

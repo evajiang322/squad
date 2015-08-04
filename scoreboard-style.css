@@ -1,0 +1,28 @@
+body{
+  background-color: black;
+  color: white;
+  font-family: Arial;
+  font-size: 24pt;
+  text-align:center;
+
+}
+
+table{
+  border-style: dotted;
+  margin-left:27%;
+  padding:10px;
+}
+
+
+#placedScore{
+  background-color: #BEF243;
+  padding:5px;
+  color:white;
+}
+
+
+#placedUserName{
+  background-color: white;
+  padding:5px;
+  color: black;
+}

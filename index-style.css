@@ -33,7 +33,7 @@ body {
   z-index:-1;
 }
 
-#cloudPic:hover{
+#cloudPic:hover,h2{
   position:fixed;
   margin-left:-179px;
   margin-top:-30px;
@@ -136,7 +136,7 @@ h2{
   position:fixed;
   color: blue;
   margin-top:90px;
-  margin-left:10px;
+  margin-left:2px;
 
 }
 
