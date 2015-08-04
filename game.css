@@ -2,33 +2,72 @@
     margin: 0px; padding: 0;
   }
 
+a {
+  color:white;
+  text-decoration: none;
+}
+
 body {
-    height:100%;
-  }
-
-/*div{
-  border-style: solid;
-  padding: 50px;
-}*/
-
-body{
-  /*text-align: center;*/
-  /*background-color:black;
-  color:white;*/
+  background-color:black;
+  color:white;
 }
 
 #canvas {
     z-index:-1;
-    margin-left:20px;
+    margin-left:400px;
     border-style: double;
     position:absolute;
     background-color: lavender;
-    width:800px;
-    height:500px;
   }
+
+#currentScore, #goHome, #pauseResumeGame{
+  position:absolute;
+  text-align:center;
+  width:100px;
+  margin-left: 100px;
+  border-style:dotted;
+  padding:10px;
+}
+
+#goHome{
+  color:white;
+  margin-top:34%;
+  font-weight: normal;
+  width:100px;
+}
+
+#pauseResumeGame{
+  color:white;
+  margin-top:18%;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  width:100px;
+}
+
+#pauseResumeGame:hover{
+  cursor:pointer;
+}
+
+#startButtonPic{
+  margin-left: 400px;
+  margin-top: 0px;
+  height:530px;
+  z-index:0;
+  width:830px;
+  position:fixed;
+}
+
 
 h2{
   text-align:center;
   /*color: white;*/
+
+}
+
+h3{
+  text-decoration: underline;
+  padding:10px;
+
 
 }

@@ -1,8 +1,26 @@
-// $(function(){
-//   $("body").keydown(function(event){
-//     $("#testbox").html(event.which);
-//   });
 
+//Checks the state of the game.
+//This is just for aesthetics
+
+
+var isPaused = true;
+
+$("#pauseResumeGame").click(function(){
+  if(isPaused){
+    $("#pauseResume").html("Resume");
+  }else{
+    $("#pauseResume").html("Pause");
+  }
+  isPaused = !isPaused;
+
+});
+
+
+$("#startButtonPic").click(function(){
+  $("#startButtonPic").hide();
+});
+
+// vvvvvvv Canvasing begins here vvvvvvv
 var c = document.getElementById("canvas");
 var ctx = c.getContext("2d");
 
@@ -12,44 +30,53 @@ var x_coord = [];
 var y_coord = [];
 
 
-$("canvas").click(function generateRandomBubble(){
+function generateRandomBubble(){
   // console.log("Im clicked");
   //getting a random index number to get a random letter from alphabet
   var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
   index = index % alphabet.length;
   var random_letter = alphabet[index];
 
-  //picking random coordinates
-  var centerx = Math.floor(Math.random() * (canvas.width - 10 + 1)) + 10;
-  var centery = Math.floor(Math.random() * (canvas.height - 10 + 1)) + 10;
+  //picking random coordinates: inclusive on both ends; Math.floor(Math.random() * (max - min + 1)) + min;
+  var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
+  var centery = Math.floor(Math.random() * ((canvas.height - 26) - 26 + 1)) + 26;
+
+  //checking to make sure that the coordinates won't overlap each other
+  for (i=0; i< x_coord.length;i++){
+    if (Math.abs(centerx - x_coord[i]) <= 50 && Math.abs(centery - y_coord[i]) <= 50){
+      return;
+    }
+  }
 
   //so the program knows which letters to check for to delete and its coordinates
   letters_to_delete.push(random_letter);
-  // console.log(letters_to_delete);
   x_coord.push(centerx);
   y_coord.push(centery);
+  // console.log(letters_to_delete);
   // console.log(x_coord);
   // console.log(y_coord);
 
-  //drawing the circle thing
+  //drawing the circle
   ctx.beginPath();
-  ctx.arc(centerx+3, centery-4, 10, 0, 2 * Math.PI);
+  ctx.arc(centerx+3, centery-4, 25, 0, 2 * Math.PI);
   ctx.strokeStyle = "black";
   ctx.fillStyle = "black";
+  ctx.font = "20px serif";
   ctx.fillText(random_letter, centerx , centery);
   ctx.stroke();
-});
+}
+
 
 $(document).keydown(function(event){
   //this gets the keycode and converts the number to a lowercase letter
   keynum = event.which;
   letter_pressed = String.fromCharCode(keynum).toLowerCase();
-  console.log(letter_pressed);
+  // console.log(letter_pressed);
   //deleting. aka drawing over the thing.
   for (var i = 0; i < letters_to_delete.length; i++){
     if (letters_to_delete[i] === letter_pressed){
       ctx.beginPath();
-      ctx.arc(x_coord[i]+3, y_coord[i]-4, 11, 0, 2 * Math.PI);
+      ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
       ctx.fillStyle = "lavender";
       ctx.strokeStyle = "lavender";
       ctx.fill();
@@ -58,11 +85,17 @@ $(document).keydown(function(event){
       letters_to_delete.splice(i, 1);
       x_coord.splice(i, 1);
       y_coord.splice(i, 1);
-      i--;
+
+      //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
+      return;
+      // i--;
     }
   }
-
 });
 
+//calling the function generateRandomBubble continuously over timed intervals; put this into the start button/resume button
+setInterval(function (){generateRandomBubble()}, 1000);
 
-// });
+//stopping the circles from generating --> put the second part into pause button
+// var generating = setInterval(function (){generateRandomBubble()}, 1000);
+// clearInterval(generating);
