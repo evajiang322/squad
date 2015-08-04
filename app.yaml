@@ -17,6 +17,14 @@ handlers:
   static_files: index-script.js
   upload: index-script\.js
 
+- url: /game\.css
+  static_files: game.css
+  upload: game\.css
+
+- url: /game\.js
+  static_files: game.js
+  upload: game\.js
+
 - url: /scoreboard\.html
   static_files: scoreboard.html
   upload: scoreboard\.html

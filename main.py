@@ -46,7 +46,6 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_params))
 
     def post(self):
-
         name = self.request.get('name')
         # points = self.request.get('points')
         # user = User(name=name, points=int(points))
@@ -54,6 +53,12 @@ class MainHandler(webapp2.RequestHandler):
         user_key = user.put()
         self.redirect('/')
 
+class GameHandler(webapp2.RequestHandler):
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('game.html')
+        self.response.write(template.render())
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/game', GameHandler)
 ], debug=True)
