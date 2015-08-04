@@ -95,7 +95,7 @@ body {
 #rules:hover{
   background-color: #FF0000;
   margin-left:-20px;
-
+  cursor: pointer;
 }
 
 #scoreboard{
