@@ -5,16 +5,36 @@
   $("#gameOverPic").hide();
 
 
-var score_value = 0;
 //for scope issues
+var score_value = 0;
 var generating = 0;
-
 var startBtnPressed = false;
+var countdownTimer = 0;
 
+// countdown timer
+var seconds = 60;
+function secondPassed() {
+    var minutes = Math.round((seconds - 30)/60);
+    var remainingSeconds = seconds % 60;
+    if (remainingSeconds < 10) {
+        remainingSeconds = "0" + remainingSeconds;
+    }
+    document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
+    if (seconds == 0) {
+        clearInterval(countdownTimer);
+        document.getElementById('countdown').innerHTML = "Time's Up";
+    } else {
+        seconds--;
+    }
+}
+
+
+//start
 $("#startButtonPic").click(function(){
   $("#startButtonPic").hide();
   startBtnPressed = true;
   generating = setInterval(function (){generateRandomBubble()}, 1000);
+  countdownTimer = setInterval('secondPassed()', 1000);
 
 });
 
@@ -26,9 +46,11 @@ $("#pauseResumeGame").click(function(){
       $("#pauseResume").html("Resume");
       $("#paused").show();
       clearInterval(generating);
+      clearInterval(countdownTimer);
     }else{
       $("#pauseResume").html("Pause");
       generating = setInterval(function (){generateRandomBubble()}, 1000);
+      countdownTimer = setInterval('secondPassed()', 1000);
       $("#paused").hide();
     }
     isPaused = !isPaused;
@@ -121,22 +143,3 @@ $(document).keydown(function(event){
 });
 
 $("#score_val").html(score_value);
-
-
-//countdown timer
-// var seconds = 60;
-// function secondPassed() {
-//     var minutes = Math.round((seconds - 30)/60);
-//     var remainingSeconds = seconds % 60;
-//     if (remainingSeconds < 10) {
-//         remainingSeconds = "0" + remainingSeconds;
-//     }
-//     document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
-//     if (seconds == 0) {
-//         clearInterval(countdownTimer);
-//         document.getElementById('countdown').innerHTML = "Buzz Buzz";
-//     } else {
-//         seconds--;
-//     }
-// }
-// var countdownTimer = setInterval('secondPassed()', 1000);
