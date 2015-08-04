@@ -25,9 +25,9 @@ handlers:
   static_files: game.js
   upload: game\.js
 
-# - url: /scoreboard\.html
-#   static_files: scoreboard.html
-#   upload: scoreboard\.html
+- url: /scoreboard\.html
+  static_files: scoreboard.html
+  upload: scoreboard\.html
 
 - url: /scoreboard-style\.css
   static_files: scoreboard-style.css
