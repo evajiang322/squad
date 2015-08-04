@@ -34,16 +34,8 @@ class User(ndb.Model):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        points =[999, 980]
-        user_query = User.query()
-        # user_query = user_query.order(-User.points)
-        user_data = user_query.fetch(10)
-        template_params = {}
-        template_params['users'] = user_data
-        template_params['points'] = points
-
         template = JINJA_ENVIRONMENT.get_template('index.html')
-        self.response.write(template.render(template_params))
+        self.response.write(template.render())
 
     def post(self):
         name = self.request.get('name')
