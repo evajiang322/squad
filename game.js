@@ -2,33 +2,39 @@
 //Checks the state of the game.
 //This is just for aesthetics
   $("#paused").hide();
+  $("#gameOverPic").hide();
 
 
 var score_value = 0;
 //for scope issues
 var generating = 0;
 
+var startBtnPressed = false;
+
 $("#startButtonPic").click(function(){
   $("#startButtonPic").hide();
+  startBtnPressed = true;
   generating = setInterval(function (){generateRandomBubble()}, 1000);
+
 });
 
 //pause and resume button.
 var isPaused = true;
+if(startBtnPressed){
+  $("#pauseResumeGame").click(function(){
+    if(isPaused){
+      $("#pauseResume").html("Resume");
 
-$("#pauseResumeGame").click(function(){
-  if(isPaused){
-    $("#pauseResume").html("Resume");
-    clearInterval(generating);
-    $("#paused").show();
-  }else{
-    $("#pauseResume").html("Pause");
-    generating = setInterval(function (){generateRandomBubble()}, 1000);
-    $("#paused").hide();
-  }
-  isPaused = !isPaused;
-});
-
+      $("#paused").show();
+      clearInterval(generating);
+    }else{
+      $("#pauseResume").html("Pause");
+      generating = setInterval(function (){generateRandomBubble()}, 1000);
+      $("#paused").hide();
+    }
+    isPaused = !isPaused;
+  });
+};
 
 
 
@@ -88,7 +94,7 @@ $(document).keydown(function(event){
     //deleting. aka drawing over the thing.
     for (var i = 0; i < letters_to_delete.length; i++){
       if (letters_to_delete[i] === letter_pressed){
-        score_value = score_value + 100;
+        score_value += 100;
         $("#score_val").html(score_value);
         ctx.beginPath();
         ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
@@ -105,6 +111,7 @@ $(document).keydown(function(event){
         return;
         // i--;
       }
+
       else if(letters_to_delete[i] !== letter_pressed) {
         score_value -= 200;
         if(score_value <= 0){
