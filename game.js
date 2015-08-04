@@ -124,20 +124,20 @@ $(document).keydown(function(event){
 $("#score_val").html(score_value);
 
 
-//countdown timer
-// var seconds = 60;
-// function secondPassed() {
-//     var minutes = Math.round((seconds - 30)/60);
-//     var remainingSeconds = seconds % 60;
-//     if (remainingSeconds < 10) {
-//         remainingSeconds = "0" + remainingSeconds;
-//     }
-//     document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
-//     if (seconds == 0) {
-//         clearInterval(countdownTimer);
-//         document.getElementById('countdown').innerHTML = "Buzz Buzz";
-//     } else {
-//         seconds--;
-//     }
-// }
-// var countdownTimer = setInterval('secondPassed()', 1000);
+// countdown Timer
+var seconds = 59;
+function secondPassed() {
+    var minutes = Math.round((seconds - 30)/60);
+    var remainingSeconds = seconds % 60;
+    if (remainingSeconds < 10) {
+        remainingSeconds = "0" + remainingSeconds;
+    }
+    document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
+    if (seconds == 0) {
+        clearInterval(countdownTimer);
+        document.getElementById('countdown').innerHTML = "Time's Up!";
+    } else {
+        seconds--;
+    }
+}
+var countdownTimer = setInterval('secondPassed()', 1000);
