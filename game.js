@@ -21,17 +21,18 @@ $("#startButtonPic").click(function(){
 //pause and resume button.
 var isPaused = true;
 $("#pauseResumeGame").click(function(){
-  if(isPaused){
-    $("#pauseResume").html("Resume");
-
-    $("#paused").show();
-    clearInterval(generating);
-  }else{
-    $("#pauseResume").html("Pause");
-    generating = setInterval(function (){generateRandomBubble()}, 1000);
-    $("#paused").hide();
+  if(startBtnPressed){
+    if(isPaused){
+      $("#pauseResume").html("Resume");
+      $("#paused").show();
+      clearInterval(generating);
+    }else{
+      $("#pauseResume").html("Pause");
+      generating = setInterval(function (){generateRandomBubble()}, 1000);
+      $("#paused").hide();
+    }
+    isPaused = !isPaused;
   }
-  isPaused = !isPaused;
 });
 
 
