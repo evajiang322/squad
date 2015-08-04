@@ -19,8 +19,6 @@ body {
     border-style: double;
     position:absolute;
     background-color: lavender;
-    width:800px;
-    height:500px;
   }
 
 #currentScore, #goHome, #pauseResumeGame{

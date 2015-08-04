@@ -34,9 +34,9 @@ $("canvas").click(function generateRandomBubble(){
   index = index % alphabet.length;
   var random_letter = alphabet[index];
 
-  //picking random coordinates
-  var centerx = Math.floor(Math.random() * (canvas.width - 10 + 1)) + 10;
-  var centery = Math.floor(Math.random() * (canvas.height - 10 + 1)) + 10;
+  //picking random coordinates: inclusive on both ends; Math.floor(Math.random() * (max - min + 1)) + min;
+  var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
+  var centery = Math.floor(Math.random() * ((canvas.height - 26) - 26 + 1)) + 26;
 
   //so the program knows which letters to check for to delete and its coordinates
   letters_to_delete.push(random_letter);
@@ -48,9 +48,10 @@ $("canvas").click(function generateRandomBubble(){
 
   //drawing the circle thing
   ctx.beginPath();
-  ctx.arc(centerx+3, centery-4, 10, 0, 2 * Math.PI);
+  ctx.arc(centerx+3, centery-4, 25, 0, 2 * Math.PI);
   ctx.strokeStyle = "black";
   ctx.fillStyle = "black";
+  ctx.font = "20px serif";
   ctx.fillText(random_letter, centerx , centery);
   ctx.stroke();
 });
@@ -64,7 +65,7 @@ $(document).keydown(function(event){
   for (var i = 0; i < letters_to_delete.length; i++){
     if (letters_to_delete[i] === letter_pressed){
       ctx.beginPath();
-      ctx.arc(x_coord[i]+3, y_coord[i]-4, 11, 0, 2 * Math.PI);
+      ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
       ctx.fillStyle = "lavender";
       ctx.strokeStyle = "lavender";
       ctx.fill();
