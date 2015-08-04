@@ -67,7 +67,7 @@ $(document).keydown(function(event){
   //this gets the keycode and converts the number to a lowercase letter
   keynum = event.which;
   letter_pressed = String.fromCharCode(keynum).toLowerCase();
-  console.log(letter_pressed);
+  // console.log(letter_pressed);
   //deleting. aka drawing over the thing.
   for (var i = 0; i < letters_to_delete.length; i++){
     if (letters_to_delete[i] === letter_pressed){
@@ -81,7 +81,10 @@ $(document).keydown(function(event){
       letters_to_delete.splice(i, 1);
       x_coord.splice(i, 1);
       y_coord.splice(i, 1);
-      i--;
+
+      //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
+      return;
+      // i--;
     }
   }
 });
