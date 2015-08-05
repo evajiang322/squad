@@ -6,6 +6,7 @@
   $("#staticButton").hide();
   $("#fallingButton").hide();
   $("#selectVersionPrompt").hide();
+  $("#countdown").hide();
 
 
 
@@ -90,6 +91,7 @@ $("#startButtonPic").click(function(){
   $("#staticButton").show();
   $("#fallingButton").show();
   $("#selectVersionPrompt").show();
+  $("#countdown").show();
 
 
   $("#staticButton").click(function() {
@@ -128,6 +130,7 @@ var isPaused = true;
 $("#pauseResumeGame").click(function(){
   if(startBtnPressed && !isGameOver && versionSelected){
     if(isPaused){
+      $("#countdown").hide();
       $("#pauseResume").html("Resume");
       $("#paused").show();
       clearInterval(generating);
@@ -136,6 +139,7 @@ $("#pauseResumeGame").click(function(){
       window.cancelAnimationFrame(raf);
     }else{
       $("#pauseResume").html("Pause");
+      $("#countdown").show();
       generating = setInterval('generateRandomBubble()', 1000);
       countdownTimer = setInterval('secondPassed()', 1000);
       raf = window.requestAnimationFrame(draw);

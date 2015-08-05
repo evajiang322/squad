@@ -20,6 +20,14 @@ body {
     background-color: lavender;
   }
 
+#countdown{
+  position:absolute;
+  margin-left: 1150px;
+  margin-top:10px;
+  color:red;
+  font-family:Arial;
+}
+
 #currentScore, #goHome, #pauseResumeGame, #submitScoreBtn, #restartGame, #fallingButton, #staticButton{
   color:white;
   position:absolute;
