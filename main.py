@@ -34,7 +34,6 @@ class User(ndb.Model):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-
         template = JINJA_ENVIRONMENT.get_template('index.html')
         self.response.write(template.render())
 
@@ -50,6 +49,7 @@ class GameHandler(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('game.html')
         self.response.write(template.render())
+
 
 class ScoreboardHandler(webapp2.RequestHandler):
     def get(self):
