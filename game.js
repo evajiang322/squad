@@ -15,7 +15,7 @@ var countdownTimer = 0;
 // var bubbleRemoval = 0;
 
 // countdown timer
-var seconds = 2;
+var seconds = 10;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -45,7 +45,6 @@ function play(){
 function finishPlay(){
     var audio = document.getElementById("timesUpMp3");
     audio.play();
-
 }
 
 
@@ -117,7 +116,6 @@ function generateRandomBubble(){
   y_coord.push(centery);
   // bubble_time.push(5);
 
-
   //drawing the circle
   ctx.beginPath();
   ctx.arc(centerx+3, centery-4, 25, 0, 2 * Math.PI);
@@ -155,7 +153,7 @@ $(document).keydown(function(event){
         //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
         return;
       }
-      else if(i === letters_to_delete.length - 1 && letters_to_delete[i] !== letter_pressed){
+      else if(i === letters_to_delete.length - 1){
         score_value -= 200;
         if(score_value <= 0){
           score_value = 0;
@@ -248,7 +246,7 @@ $("#score_val").html(score_value);
 //         falling_list.splice(i, 1);
 //         return;
 //       }
-//       else if(i === falling_list.length - 1 && falling_list[i].letter !== letter_pressed){
+//       else if(i === falling_list.length - 1){
 //         score_value -= 200;
 //         if(score_value <= 0){
 //           score_value = 0;
