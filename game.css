@@ -42,6 +42,23 @@ body {
 
 }
 
+#fallingButton:hover, #staticButton:hover{
+  margin-top: 290px;
+  background-color: #F20056;
+  text-transform: uppercase;
+  font-family:Arial;
+  cursor:pointer;
+  padding:20px;
+}
+
+#fallingButton:hover{
+  margin-left:590px;
+}
+
+#staticButton:hover{
+  margin-left:895px;
+}
+
 #staticButton{
   margin-left: 905px;
 }
@@ -93,6 +110,20 @@ body {
   z-index:0;
   width:830px;
   position:fixed;
+}
+
+#sound{
+  position:absolute;
+  width:30px;
+  border-style: solid;
+  border-color: white;
+  background-color: red;
+  margin-left: 400px;
+}
+
+#sound:hover{
+  cursor:pointer;
+
 }
 
 #submitScoreBtn{

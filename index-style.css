@@ -8,23 +8,6 @@ body {
     color:white;
   }
 
-/*div{
-  border-style: solid;
-  padding: 50px;
-}*/
-
-
-#canvas {
-    z-index:-1;
-    margin-left:20px;
-    margin-top: 20px;
-    border-style: double;
-    position:absolute;
-    background-color: lightgray;
-    width:800px;
-    height:500px;
-  }
-
 #cloudPic{
   position:fixed;
   margin-left:-199px;
@@ -75,6 +58,10 @@ body {
   margin-top:230px;
   font-size:16pt;
   width:50%;
+}
+
+#aboutGame:hover, #gameRules:hover{
+  cursor:default;
 }
 
 #goToGame{

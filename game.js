@@ -10,6 +10,7 @@
 
 
 
+
 //for scope issues
 var score_value = 0;
 var generating = 0;
@@ -18,9 +19,35 @@ var isGameOver = false;
 var countdownTimer = 0;
 var versionSelected = false;
 var whichVersion = "...";
-
+var volumeOn = true;
+var allSoundsPop = document.getElementById('popSound');
+var allSoundsTime = document.getElementById('timesUpMp3');
 // var countdownBubble = 0;
 // var bubbleRemoval = 0;
+
+//let the user turn the volume on or off
+$("#sound").click(function(){
+  if(volumeOn)
+  {
+    volumeOn = false;
+    $(this).attr('src','https://lh3.ggpht.com/K6PQwW_obxSIliOtx98EW002lZQ01BYRSLztDpPwxQiNrw35CWnPcfjm0AK6fbP69P4=w300');
+    allSoundsPop.muted = true;
+    allSoundsTime.muted = true;
+  }
+  else {
+    {
+      volumeOn = true;
+      $(this).attr('src','https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/volume_down.png');
+      allSoundsPop.muted = false;
+      allSoundsTime.muted = false;
+    }
+  }
+
+
+});
+
+
+
 
 // countdown timer
 var seconds = 5;
@@ -67,6 +94,7 @@ $("#startButtonPic").click(function(){
 
 
   $("#staticButton").click(function() {
+    $(this).css("background-color","blue");
     whichVersion = "normal";
     versionSelected = true;
     $("#staticButton").hide();
