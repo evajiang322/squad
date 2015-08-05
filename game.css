@@ -38,6 +38,32 @@ body {
   padding:10px;
 }
 
+#goHome:hover, #pauseResumeGame:hover, #submitScoreBtn:hover, #restartGame:hover {
+cursor:pointer;
+}
+
+#restartGame:hover{
+  background-color:lightgreen;
+}
+
+#pauseResumeGame:hover{
+  /*background-color: #A0522D;*/
+  background-color: #E9967A;
+}
+
+#submitScoreBtn:hover{
+  background-color: #7B68EE;
+}
+
+
+#currentScore:hover{
+  cursor:default;
+}
+
+#goHome:hover{
+  background-color: goldenrod;
+}
+
 #fallingButton, #staticButton{
   margin-top:300px;
   background-color:black;
@@ -46,7 +72,7 @@ body {
 
 #fallingButton{
 
-  margin-left:600px;
+  margin-left:905px;
 
 }
 
@@ -60,15 +86,15 @@ body {
 }
 
 #fallingButton:hover{
-  margin-left:590px;
-}
-
-#staticButton:hover{
   margin-left:895px;
 }
 
+#staticButton:hover{
+  margin-left:590px;
+}
+
 #staticButton{
-  margin-left: 905px;
+  margin-left: 600px;
 }
 
 #selectVersionPrompt{
