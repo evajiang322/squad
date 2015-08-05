@@ -8,9 +8,6 @@
   $("#selectVersionPrompt").hide();
 
 
-
-
-
 //for scope issues
 var score_value = 0;
 var generating = 0;
@@ -101,7 +98,7 @@ $("#startButtonPic").click(function(){
     $("#selectVersionPrompt").hide();
     $("#staticButton").hide();
     $("#fallingButton").hide();
-    generating = setInterval('generateRandomBubble()', 1000);
+    generating = setInterval('generateRandomBubble()', 700);
     countdownTimer = setInterval('secondPassed()', 1000);
 
   });
@@ -112,7 +109,7 @@ $("#startButtonPic").click(function(){
     $("#staticButton").hide();
     $("#fallingButton").hide();
     $("#selectVersionPrompt").hide();
-    generating_falling = setInterval('generateFallingBubble()', 1000);
+    generating_falling = setInterval('generateFallingBubble()', 500);
     //calling the animation:
     raf = window.requestAnimationFrame(draw);
     countdownTimer = setInterval('secondPassed()', 1000);
@@ -235,10 +232,10 @@ $("#score_val").html(score_value);
 var falling_list = [];
 var raf = 0;
 
-function bubble(random_letter, centerx){
+function bubble(random_letter, centerx, random_rate){
   this.x = centerx;
   this.y = 30;
-  this.vy = 2;
+  this.vy = random_rate;
   this.letter = random_letter;
   this.draw = function(){
     ctx.beginPath();
@@ -256,6 +253,7 @@ function generateFallingBubble(){
   var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
   index = index % alphabet.length;
   var random_letter = alphabet[index];
+  var random_rate = Math.ceil((Math.random() * 5 - 1) + 1);
 
   var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
 
@@ -263,13 +261,13 @@ function generateFallingBubble(){
   for (i=0; i < falling_list.length;i++){
     xdiff = Math.abs(centerx - falling_list[i].x);
     ydiff = Math.abs(50 - falling_list[i].y);
-    if (xdiff <= 50 && ydiff <= 50){
+    if (xdiff <= 50){
       return;
     }
   }
 
   //creating the circle
-  var circle = new bubble(random_letter, centerx);
+  var circle = new bubble(random_letter, centerx, random_rate);
   circle.draw();
   falling_list.push(circle);
 }
