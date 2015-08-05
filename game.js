@@ -15,7 +15,7 @@ var countdownTimer = 0;
 // var bubbleRemoval = 0;
 
 // countdown timer
-var seconds = 59;
+var seconds = 2;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -29,10 +29,23 @@ function secondPassed() {
         document.getElementById('countdown').innerHTML = "Time's Up!";
         $("#gameOverPic").show();
         isGameOver = true;
+        $("#timesUpMp3").ready(function() {finishPlay();});
 
     } else {
         seconds--;
     }
+}
+
+//pop sound
+function play(){
+       var audio = document.getElementById("popSound");
+       audio.play();
+}
+
+function finishPlay(){
+    var audio = document.getElementById("timesUpMp3");
+    audio.play();
+
 }
 
 
@@ -126,6 +139,7 @@ $(document).keydown(function(event){
     for (var i = 0; i < letters_to_delete.length; i++){
       if (letters_to_delete[i] === letter_pressed){
         score_value += 100;
+        $("#popSound").ready(function() {play();});
         $("#score_val").html(score_value);
         ctx.beginPath();
         ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);

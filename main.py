@@ -49,7 +49,7 @@ class GameHandler(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('game.html')
         self.response.write(template.render())
-        
+
 
 class ScoreboardHandler(webapp2.RequestHandler):
     def get(self):
