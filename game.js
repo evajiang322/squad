@@ -156,7 +156,7 @@ $(document).keydown(function(event){
 $("#score_val").html(score_value);
 
 //
-//for the bubbles to fall down the page:
+//FOR BUBBLES TO FALL DOWN THE CANVAS:
 var falling_list = [];
 var raf = 0
 
@@ -183,13 +183,12 @@ $("#canvas").click(function generateFallingBubble(){
   var random_letter = alphabet[index];
 
   var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
-  var centery = Math.floor(Math.random() * ((canvas.height - 26) - 26 + 1)) + 26;
 
   //checking to make sure that the coordinates won't overlap each other
   for (i=0; i < falling_list.length;i++){
     xdiff = Math.abs(centerx - falling_list[i].x);
-    ydiff = Math.abs(centery - falling_list[i].y);
-    if (xdiff <= 50){
+    ydiff = Math.abs(50 - falling_list[i].y);
+    if (xdiff <= 50 && ydiff <= 50){
       return;
     }
   }
@@ -198,11 +197,9 @@ $("#canvas").click(function generateFallingBubble(){
   var circle = new bubble(random_letter, centerx);
   circle.draw();
   falling_list.push(circle);
-  console.log(falling_list);
-
-  raf = window.requestAnimationFrame(draw);
 });
 
+//drawing the new position of the circle when it 'moves'
 function draw() {
   ctx.clearRect(0,0, canvas.width, canvas.height);
   for (i=0; i< falling_list.length; i++){
@@ -212,13 +209,17 @@ function draw() {
   raf = window.requestAnimationFrame(draw);
 }
 
+//calling the animation:
+raf = window.requestAnimationFrame(draw);
+//stopping the animation:
+//window.cancelAnimationFrame(raf);
+
 $(document).keydown(function(event){
   // if (isPaused && !isGameOver){
     //this gets the keycode and converts the number to a lowercase letter
-    console.log("beginning of function:" + falling_list);
     keynum = event.which;
     letter_pressed = String.fromCharCode(keynum).toLowerCase();
-    // console.log(letter_pressed);
+
     //deleting. aka drawing over the thing.
     for (var i = 0; i < falling_list.length; i++){
       if (falling_list[i].letter === letter_pressed){
