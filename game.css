@@ -20,7 +20,7 @@ body {
     background-color: lavender;
   }
 
-#currentScore, #goHome, #pauseResumeGame, #submitScoreBtn, #restartGame{
+#currentScore, #goHome, #pauseResumeGame, #submitScoreBtn, #restartGame, #fallingButton, #staticButton{
   color:white;
   position:absolute;
   text-align:center;
@@ -28,6 +28,29 @@ body {
   margin-left: 100px;
   border-style:dotted;
   padding:10px;
+}
+
+#fallingButton, #staticButton{
+  margin-top:300px;
+  background-color:black;
+  z-index: 0;
+}
+
+#fallingButton{
+
+  margin-left:600px;
+
+}
+
+#staticButton{
+  margin-left: 905px;
+}
+
+#selectVersionPrompt{
+  position:absolute;
+  margin-left: 615px;
+  margin-top: 200px;
+  color:black;
 }
 
 #goHome{
@@ -50,19 +73,18 @@ body {
 
 #restartGame{
   margin-top:11%;
-  margin-left: 7%;
   text-decoration: none;
   font-weight: bold;
   text-transform: uppercase;
   width:100px;
 }
 
-#resultForm{
+/*#resultForm{
   position:fixed;
   margin-left:725px;
   margin-top:400px;
 
-}
+}*/
 
 #startButtonPic,#paused,#gameOverPic{
   margin-left: 400px;
@@ -75,7 +97,6 @@ body {
 
 #submitScoreBtn{
   margin-top:26%;
-  margin-left: 7%;
   text-decoration: none;
   font-weight: bold;
   text-transform: uppercase;
