@@ -251,6 +251,7 @@ function draw() {
   for (i=0; i< falling_list.length; i++){
     falling_list[i].draw();
     falling_list[i].y += falling_list[i].vy;
+    checkFallingY(i);
   }
   raf = window.requestAnimationFrame(draw);
 }
@@ -276,6 +277,7 @@ $(document).keydown(function(event){
         falling_list.splice(i, 1);
         return;
       }
+      //if the key pressed does not match any of the letters on screen
       else if(i === falling_list.length - 1){
         score_value -= 200;
         if(score_value <= 0){
@@ -288,3 +290,16 @@ $(document).keydown(function(event){
 });
 
 $("#score_val").html(score_value);
+
+function checkFallingY(i){
+  // for (i=0; i<falling_list.length; i++){
+    if (falling_list[i].y >=500){
+      score_value -= 200;
+      falling_list.splice(i, 1);
+      if (score_value <= 0){
+        score_value = 0;
+      }
+      $("#score_val").html(score_value);
+    }
+  // }
+}
