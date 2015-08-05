@@ -36,6 +36,7 @@ function secondPassed() {
         document.getElementById('countdown').innerHTML = "Time's Up!";
         $("#gameOverPic").show();
         isGameOver = true;
+        window.cancelAnimationFrame(raf);
         $("#timesUpMp3").ready(function() {finishPlay();});
 
     } else {
@@ -257,7 +258,7 @@ function draw() {
 }
 
 $(document).keydown(function(event){
-  // if (isPaused && !isGameOver){
+  if (isPaused && !isGameOver){
     //this gets the keycode and converts the number to a lowercase letter
     keynum = event.which;
     letter_pressed = String.fromCharCode(keynum).toLowerCase();
@@ -286,13 +287,13 @@ $(document).keydown(function(event){
         $("#score_val").html(score_value);
       }
     }
-  //}
+  }
 });
 
 $("#score_val").html(score_value);
 
+//when the bubble reaches the bottom of the canvas, delete from list and subtract points.
 function checkFallingY(i){
-  // for (i=0; i<falling_list.length; i++){
     if (falling_list[i].y >=500){
       score_value -= 200;
       falling_list.splice(i, 1);
@@ -301,5 +302,4 @@ function checkFallingY(i){
       }
       $("#score_val").html(score_value);
     }
-  // }
 }
