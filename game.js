@@ -242,6 +242,7 @@ function bubble(random_letter, centerx, random_rate){
   this.vy = random_rate;
   this.letter = random_letter;
   this.draw = function(){
+
     ctx.beginPath();
     ctx.arc(this.x+3, this.y-4, 25, 0, 2 * Math.PI);
     ctx.strokeStyle = "black";
@@ -296,6 +297,7 @@ $(document).keydown(function(event){
     //deleting. aka drawing over the thing.
     for (var i = 0; i < falling_list.length; i++){
       if (falling_list[i].letter === letter_pressed){
+        $("#popSound").ready(function() {play();});
         score_value += 100;
         $("#score_val").html(score_value);
         ctx.beginPath();
@@ -310,7 +312,7 @@ $(document).keydown(function(event){
       }
       //if the key pressed does not match any of the letters on screen
       else if(i === falling_list.length - 1){
-        score_value -= 200;
+        score_value -= 50;
         if(score_value <= 0){
           score_value = 0;
         }
@@ -325,7 +327,7 @@ $("#score_val").html(score_value);
 //when the bubble reaches the bottom of the canvas, delete from list and subtract points.
 function checkFallingY(i){
     if (falling_list[i].y >=500){
-      score_value -= 200;
+      score_value -= 50;
       falling_list.splice(i, 1);
       if (score_value <= 0){
         score_value = 0;
