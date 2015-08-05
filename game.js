@@ -3,6 +3,11 @@
 //This is just for aesthetics
   $("#paused").hide();
   $("#gameOverPic").hide();
+  $("#staticButton").hide();
+  $("#fallingButton").hide();
+  $("#selectVersionPrompt").hide();
+
+
 
 
 //for scope issues
@@ -11,6 +16,9 @@ var generating = 0;
 var startBtnPressed = false;
 var isGameOver = false;
 var countdownTimer = 0;
+var versionSelected = false;
+var whichVersion = "...";
+
 // var countdownBubble = 0;
 // var bubbleRemoval = 0;
 
@@ -53,16 +61,47 @@ function finishPlay(){
 $("#startButtonPic").click(function(){
   $("#startButtonPic").hide();
   startBtnPressed = true;
-  generating = setInterval('generateRandomBubble()', 1000);
-  countdownTimer = setInterval('secondPassed()', 1000);
+  $("#staticButton").show();
+  $("#fallingButton").show();
+  $("#selectVersionPrompt").show();
+
+
+  $("#staticButton").click(function() {
+    whichVersion = "normal";
+    versionSelected = true;
+    $("#staticButton").hide();
+    $("#fallingButton").hide();
+    $("#selectVersionPrompt").hide();
+    $("#staticButton").hide();
+    $("#fallingButton").hide();
+    generating = setInterval('generateRandomBubble()', 1000);
+    countdownTimer = setInterval('secondPassed()', 1000);
+
+  });
+
+  $("#fallingButton").click(function() {
+    whichVersion = "falling";
+    versionSelected = true;
+    $("#staticButton").hide();
+    $("#fallingButton").hide();
+    $("#selectVersionPrompt").hide();
+    generating = setInterval('generateRandomBubble()', 1000);
+    countdownTimer = setInterval('secondPassed()', 1000);
+  });
+
+
+
+
   // countdownBubble = setInterval('decrease_btime()', 1000);
   // bubbleRemoval = setInterval('bubble_removal()', 1000);
 });
 
+
+
 //pause and resume button.
 var isPaused = true;
 $("#pauseResumeGame").click(function(){
-  if(startBtnPressed && !isGameOver){
+  if(startBtnPressed && !isGameOver && versionSelected){
     if(isPaused){
       $("#pauseResume").html("Resume");
       $("#paused").show();
@@ -168,7 +207,7 @@ $(document).keydown(function(event){
 
 $("#score_val").html(score_value);
 
-//
+//function fallingGame(){
 //FOR BUBBLES TO FALL DOWN THE CANVAS:
 // var falling_list = [];
 // var raf = 0
