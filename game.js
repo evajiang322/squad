@@ -39,11 +39,7 @@ $("#sound").click(function(){
       allSoundsTime.muted = false;
     }
   }
-
-
 });
-
-
 
 
 // countdown timer
@@ -139,7 +135,9 @@ $("#pauseResumeGame").click(function(){
       $("#countdown").show();
       generating = setInterval('generateRandomBubble()', 1000);
       countdownTimer = setInterval('secondPassed()', 1000);
-      raf = window.requestAnimationFrame(draw);
+      if (whichVersion === "falling"){
+        raf = window.requestAnimationFrame(draw);
+      }
       $("#paused").hide();
     }
     isPaused = !isPaused;
@@ -155,7 +153,6 @@ var alphabet = ["a","b","c","d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
 var letters_to_delete = [];
 var x_coord = [];
 var y_coord = [];
-// var bubble_time = [];
 
 
 function generateRandomBubble(){
