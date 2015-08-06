@@ -7,6 +7,11 @@
   $("#fallingButton").hide();
   $("#selectVersionPrompt").hide();
   $("#countdown").hide();
+  var clickedOnBox = false;
+  $(".forms").html("Submit");
+  $("input").hide();
+  $("input").prop('disabled', true);
+
 
 
 
@@ -68,8 +73,12 @@ function secondPassed() {
         clearInterval(countdownTimer);
         document.getElementById('countdown').innerHTML = "Time's Up!";
         $("#gameOverPic").show();
+        $(".forms").html("Name");
         $("#score").attr("value", score_value)
         isGameOver = true;
+        $("input").show();
+        $("#submitBtn").hide();
+        $("input").prop('disabled', false);
         window.cancelAnimationFrame(raf);
         $("#timesUpMp3").ready(function() {finishPlay();});
 
