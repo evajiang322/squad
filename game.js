@@ -10,6 +10,11 @@
   $("#selectDifficulty").hide();
   $("#letters").hide();
   $("#words").hide();
+  var clickedOnBox = false;
+  $(".forms").html("Submit");
+  $("input").hide();
+  $("input").prop('disabled', true);
+
 
 //for scope issues
 var score_value = 0;
@@ -49,7 +54,7 @@ $("#sound").click(function(){
 
 
 // countdown timer
-var seconds = 10;
+var seconds = 59;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -68,8 +73,12 @@ function secondPassed() {
         clearInterval(countdownTimer);
         document.getElementById('countdown').innerHTML = "Time's Up!";
         $("#gameOverPic").show();
+        $(".forms").html("Name");
         $("#score").attr("value", score_value)
         isGameOver = true;
+        $("input").show();
+        $("#submitBtn").hide();
+        $("input").prop('disabled', false);
         window.cancelAnimationFrame(raf);
         $("#timesUpMp3").ready(function() {finishPlay();});
 
@@ -93,6 +102,10 @@ function finishPlay(){
     var audio = document.getElementById("timesUpMp3");
     audio.play();
 }
+
+function incorrectPlay()
+{ var audio = document.getElementById("wrongMp3");
+audio.play();}
 
 
 //start
@@ -295,17 +308,16 @@ $(document).keydown(function(event){
           return;
         }
         else if(i === letters_to_delete.length - 1){
+          $("#wrongMp3").ready(function(){ incorrectPlay();});
           score_value -= 200;
           if(score_value <= 0){
             score_value = 0;
           }
-          $("#score_val").html(score_value);
         }
+      else if(difficultySelected === "words"){
+        console.log("whatev");
       }
-    }else if(difficultySelected === "words"){
-
     }
-  }
 });
 
 $("#score_val").html(score_value);

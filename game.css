@@ -41,7 +41,7 @@ body {
   padding:10px;
 }
 
-#goHome:hover, #pauseResumeGame:hover, #submitScoreBtn:hover, #restartGame:hover {
+#goHome:hover, #pauseResumeGame:hover, #restartGame:hover {
 cursor:pointer;
 }
 
@@ -180,7 +180,18 @@ cursor:pointer;
 
 }*/
 
-#startButtonPic,#paused,#gameOverPic{
+
+#submitBtn{
+  margin-top:5px;
+  width:80px;
+  margin-left:10px;
+}
+
+#submitBtn:hover{
+  cursor: pointer;
+}
+
+#startButtonPic, #paused, #gameOverPic{
   margin-left: 400px;
   margin-top: 0px;
   height:530px;
@@ -209,6 +220,8 @@ cursor:pointer;
   font-weight: bold;
   text-transform: uppercase;
   width:100px;
+  height:30px;
+  padding-bottom:20px;
 
 }
 
@@ -222,6 +235,11 @@ cursor:pointer;
 h3{
   text-decoration: underline;
   padding:10px;
+}
 
 
+input{
+  position:absolute;
+  width:100px;
+  margin-left:0px;
 }
