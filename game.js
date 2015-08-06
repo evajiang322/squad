@@ -380,45 +380,68 @@ $("#score_val").html(score_value);
 // FOR BUBBLES TO FALL DOWN THE CANVAS:
 var falling_list = [];
 
-function bubble(random_letter, centerx, random_rate){
+function bubble(random_letter, centerx, random_rate, radius, centering){
   this.x = centerx;
   this.y = 30;
   this.vy = random_rate;
   this.letter = random_letter;
+  this.radius = radius;
+  this.centering = centering
   this.draw = function(){
 
     ctx.beginPath();
-    ctx.arc(this.x+3, this.y-4, 25, 0, 2 * Math.PI);
+    ctx.arc(this.x+this.centering, this.y-4, this.radius, 0, 2 * Math.PI);
     ctx.strokeStyle = "black";
     ctx.fillStyle = "black";
-    ctx.font = "20px serif";
+    ctx.font = "18px serif";
     ctx.fillText(random_letter, this.x , this.y);
     ctx.stroke();
   }
 }
 
 function generateFallingBubble(){
-  //getting a random index number to get a random letter from alphabet
-  var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
-  index = index % alphabet.length;
-  var random_letter = alphabet[index];
-  var random_rate = Math.ceil((Math.random() * 5 - 1) + 1);
+  if (whichDifficulty === "letters"){
+    //getting a random index number to get a random letter from alphabet
+    var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
+    index = index % alphabet.length;
+    var random_letter = alphabet[index];
+    var random_rate = Math.ceil((Math.random() * 5 - 1) + 1);
 
-  var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
+    var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
 
-  //checking to make sure that the coordinates won't overlap each other
-  for (i=0; i < falling_list.length;i++){
-    xdiff = Math.abs(centerx - falling_list[i].x);
-    ydiff = Math.abs(50 - falling_list[i].y);
-    if (xdiff <= 50){
-      return;
+    //checking to make sure that the coordinates won't overlap each other
+    for (i=0; i < falling_list.length;i++){
+      xdiff = Math.abs(centerx - falling_list[i].x);
+      ydiff = Math.abs(50 - falling_list[i].y);
+      if (xdiff <= 50){
+        return;
+      }
     }
-  }
 
-  //creating the circle
-  var circle = new bubble(random_letter, centerx, random_rate);
-  circle.draw();
-  falling_list.push(circle);
+    //creating the circle
+    var circle = new bubble(random_letter, centerx, random_rate, 25, 3);
+    circle.draw();
+    falling_list.push(circle);
+  }else if (whichDifficulty === "words"){
+    //getting random word from list
+    var index = Math.floor((Math.random() * words.length - 1) + 1);
+    var random_word = words[index];
+    var random_rate = 1;
+
+    var centerx = Math.floor(Math.random() * ((canvas.width - 41) - 41 + 1)) + 41;
+
+    for (i=0; i < falling_list.length;i++){
+      xdiff = Math.abs(centerx - falling_list[i].x);
+      ydiff = Math.abs(50 - falling_list[i].y);
+      if (xdiff <= 50){
+        return;
+      }
+    }
+    //creating the circle
+    var circle = new bubble(random_word, centerx, random_rate, 40, 25);
+    circle.draw();
+    falling_list.push(circle);
+  }
 }
 
 //drawing the new position of the circle when it 'moves'
@@ -434,34 +457,70 @@ function draw() {
 
 $(document).keydown(function(event){
   if (isPaused && !isGameOver && whichVersion === "falling"){
-    //this gets the keycode and converts the number to a lowercase letter
-    keynum = event.which;
-    letter_pressed = String.fromCharCode(keynum).toLowerCase();
+    if(whichDifficulty === "letters"){
+      //this gets the keycode and converts the number to a lowercase letter
+      keynum = event.which;
+      letter_pressed = String.fromCharCode(keynum).toLowerCase();
 
-    //deleting. aka drawing over the thing.
-    for (var i = 0; i < falling_list.length; i++){
-      if (falling_list[i].letter === letter_pressed){
-        $("#popSound").ready(function() {play();});
-        score_value += 100;
-        $("#score_val").html(score_value);
-        ctx.beginPath();
-        ctx.arc(falling_list[i].x+3, falling_list[i].y-4, 26, 0, 2 * Math.PI);
-        ctx.fillStyle = "lavender";
-        ctx.strokeStyle = "lavender";
-        ctx.fill();
-        ctx.stroke();
+      //deleting. aka drawing over the thing.
+      for (var i = 0; i < falling_list.length; i++){
+        if (falling_list[i].letter === letter_pressed){
+          $("#popSound").ready(function() {play();});
+          score_value += 100;
+          $("#score_val").html(score_value);
+          ctx.beginPath();
+          ctx.arc(falling_list[i].x+3, falling_list[i].y-4, 26, 0, 2 * Math.PI);
+          ctx.fillStyle = "lavender";
+          ctx.strokeStyle = "lavender";
+          ctx.fill();
+          ctx.stroke();
 
-        falling_list.splice(i, 1);
-        return;
-      }
-      //if the key pressed does not match any of the letters on screen
-      else if(i === falling_list.length - 1){
-        $("#wrongMp3").ready(function(){ incorrectPlay();});
-        score_value -= 50;
-        if(score_value <= 0){
-          score_value = 0;
+          falling_list.splice(i, 1);
+          return;
         }
-        $("#score_val").html(score_value);
+        //if the key pressed does not match any of the letters on screen
+        else if(i === falling_list.length - 1){
+          $("#wrongMp3").ready(function(){ incorrectPlay();});
+          score_value -= 50;
+          if(score_value <= 0){
+            score_value = 0;
+          }
+          $("#score_val").html(score_value);
+        }
+      }
+    }else if (whichDifficulty === "words"){
+      keynum = event.which;
+      //checking if the key pressed was anything but a space
+      if (keynum !== 32){
+        letter_pressed = String.fromCharCode(keynum).toLowerCase();
+        word_typed = word_typed + letter_pressed;
+      }else if (keynum === 32){
+        for(i=0; i< falling_list.length; i++){
+          if (falling_list[i].letter === word_typed){
+            word_typed = "";
+            score_value += 100;
+            $("#popSound").ready(function() {play();});
+            $("#score_val").html(score_value);
+            ctx.beginPath();
+            ctx.arc(falling_list[i].x+25, falling_list[i].y-4, 41, 0, 2 * Math.PI);
+            ctx.fillStyle = "lavender";
+            ctx.strokeStyle = "lavender";
+            ctx.fill();
+            ctx.stroke();
+
+            falling_list.splice(i, 1);
+            return;
+          }else if(i === falling_list.length - 1){
+            word_typed = "";
+            console.log(word_typed);
+            $("#wrongMp3").ready(function(){ incorrectPlay();});
+            score_value -= 200;
+            if(score_value <= 0){
+              score_value = 0;
+            }
+            $("#score_val").html(score_value);
+          }
+        }
       }
     }
   }
