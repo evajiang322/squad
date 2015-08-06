@@ -8,7 +8,7 @@
   $("#selectVersionPrompt").hide();
   $("#countdown").hide();
   var clickedOnBox = false;
-  $(".forms").html("Submit");
+  $(".forms").html("Submit<br />Score");
   $("input").hide();
   $("input").prop('disabled', true);
 
