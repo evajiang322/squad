@@ -245,7 +245,7 @@ function generateRandomBubble(){
 
 $(document).keydown(function(event){
   if (isPaused && !isGameOver){
-    if (difficultySelected === "letters"){
+    if (whichDifficulty === "letters"){
       //this gets the keycode and converts the number to a lowercase letter
       keynum = event.which;
       letter_pressed = String.fromCharCode(keynum).toLowerCase();
