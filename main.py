@@ -17,6 +17,7 @@
 import os
 import webapp2
 import jinja2
+import json
 from google.appengine.ext import ndb
 
 
@@ -72,8 +73,14 @@ class ScoreboardHandler(webapp2.RequestHandler):
         user.put()
         self.redirect('/scoreboard')
 
+class WordsHandler(webapp2.RequestHandler):
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('words.txt')
+        self.response.write(template.render())
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/scoreboard', ScoreboardHandler),
-    ('/game', GameHandler)
+    ('/game', GameHandler),
+    ('/words', WordsHandler)
 ], debug=True)
