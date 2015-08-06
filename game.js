@@ -179,14 +179,18 @@ $("#pauseResumeGame").click(function(){
       $("#paused").show();
       clearInterval(generating);
       clearInterval(countdownTimer);
-      //stopping the animation:
-      window.cancelAnimationFrame(raf);
+      if (whichVersion === "falling"){
+        //stopping the animation:
+        window.cancelAnimationFrame(raf);
+      }
     }else{
       $("#pauseResume").html("Pause");
       $("#countdown").show();
       generating = setInterval('generateRandomBubble()', 1000);
       countdownTimer = setInterval('secondPassed()', 1000);
-      raf = window.requestAnimationFrame(draw);
+      if (whichVersion === "falling"){
+        raf = window.requestAnimationFrame(draw);
+      }
       $("#paused").hide();
     }
     isPaused = !isPaused;
@@ -241,37 +245,39 @@ function generateRandomBubble(){
 
 $(document).keydown(function(event){
   if (isPaused && !isGameOver){
-    //this gets the keycode and converts the number to a lowercase letter
-    keynum = event.which;
-    letter_pressed = String.fromCharCode(keynum).toLowerCase();
+    if (difficultySelected === "letters"){
+      //this gets the keycode and converts the number to a lowercase letter
+      keynum = event.which;
+      letter_pressed = String.fromCharCode(keynum).toLowerCase();
 
-    //deleting. aka drawing over the thing.
-    for (var i = 0; i < letters_to_delete.length; i++){
-      if (letters_to_delete[i] === letter_pressed){
-        score_value += 100;
-        $("#popSound").ready(function() {play();});
-        $("#score_val").html(score_value);
-        ctx.beginPath();
-        ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
-        ctx.fillStyle = "lavender";
-        ctx.strokeStyle = "lavender";
-        ctx.fill();
-        ctx.stroke();
+      //deleting. aka drawing over the thing.
+      for (var i = 0; i < letters_to_delete.length; i++){
+        if (letters_to_delete[i] === letter_pressed){
+          score_value += 100;
+          $("#popSound").ready(function() {play();});
+          $("#score_val").html(score_value);
+          ctx.beginPath();
+          ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
+          ctx.fillStyle = "lavender";
+          ctx.strokeStyle = "lavender";
+          ctx.fill();
+          ctx.stroke();
 
-        letters_to_delete.splice(i, 1);
-        x_coord.splice(i, 1);
-        y_coord.splice(i, 1);
+          letters_to_delete.splice(i, 1);
+          x_coord.splice(i, 1);
+          y_coord.splice(i, 1);
 
-        //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
-        return;
-      }
-      else if(i === letters_to_delete.length - 1){
-        $("#wrongMp3").ready(function(){ incorrectPlay();});
-        score_value -= 200;
-        if(score_value <= 0){
-          score_value = 0;
+          //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
+          return;
         }
-        $("#score_val").html(score_value);
+        else if(i === letters_to_delete.length - 1){
+          $("#wrongMp3").ready(function(){ incorrectPlay();});
+          score_value -= 200;
+          if(score_value <= 0){
+            score_value = 0;
+          }
+          $("#score_val").html(score_value);
+        }
       }
     }
   }
@@ -282,7 +288,6 @@ $("#score_val").html(score_value);
 
 // FOR BUBBLES TO FALL DOWN THE CANVAS:
 var falling_list = [];
-
 
 function bubble(random_letter, centerx, random_rate){
   this.x = centerx;
