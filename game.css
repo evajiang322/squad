@@ -31,7 +31,7 @@ body {
   font-family:Arial;
 }
 
-#currentScore, #goHome, #pauseResumeGame, #submitScoreBtn, #restartGame, #fallingButton, #staticButton{
+#currentScore, #goHome, #pauseResumeGame, #submitScoreBtn, #restartGame, #fallingButton, #staticButton, #letters, #words{
   color:white;
   position:absolute;
   text-align:center;
@@ -105,6 +105,46 @@ cursor:pointer;
   margin-left: 630px;
   margin-top: 200px;
   color:black;
+}
+
+#selectDifficulty{
+  position:absolute;
+  margin-left: 740px;
+  margin-top: 200px;
+  color:black;
+}
+
+#letters, #words{
+  margin-top:300px;
+  background-color:black;
+  z-index: 0;
+}
+
+#words{
+
+  margin-left:905px;
+
+}
+
+#words:hover, #letters:hover{
+  margin-top: 290px;
+  background-color: #F20056;
+  text-transform: uppercase;
+  font-family:Arial;
+  cursor:pointer;
+  padding:20px;
+}
+
+#words:hover{
+  margin-left:895px;
+}
+
+#letters:hover{
+  margin-left:590px;
+}
+
+#letters{
+  margin-left: 600px;
 }
 
 #goHome{

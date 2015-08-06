@@ -7,20 +7,24 @@
   $("#fallingButton").hide();
   $("#selectVersionPrompt").hide();
   $("#countdown").hide();
-
+  $("#selectDifficulty").hide();
+  $("#letters").hide();
+  $("#words").hide();
 
 //for scope issues
 var score_value = 0;
 var generating = 0;
+var generating_falling = 0;
 var startBtnPressed = false;
 var isGameOver = false;
 var countdownTimer = 0;
 var versionSelected = false;
 var whichVersion = "...";
+var difficultySelected = false;
+var whichDifficulty = ".."
 var volumeOn = true;
 var allSoundsPop = document.getElementById('popSound');
 var allSoundsTime = document.getElementById('timesUpMp3');
-var generating_falling = 0;
 
 //let the user turn the volume on or off
 $("#sound").click(function(){
@@ -94,11 +98,9 @@ $("#startButtonPic").click(function(){
     $("#staticButton").hide();
     $("#fallingButton").hide();
     $("#selectVersionPrompt").hide();
-    $("#staticButton").hide();
-    $("#fallingButton").hide();
-    generating = setInterval('generateRandomBubble()', 700);
-    countdownTimer = setInterval('secondPassed()', 1000);
-
+    $("#selectDifficulty").show();
+    $("#letters").show();
+    $("#words").show();
   });
 
   $("#fallingButton").click(function() {
@@ -107,11 +109,43 @@ $("#startButtonPic").click(function(){
     $("#staticButton").hide();
     $("#fallingButton").hide();
     $("#selectVersionPrompt").hide();
-    generating_falling = setInterval('generateFallingBubble()', 500);
-    //calling the animation:
-    raf = window.requestAnimationFrame(draw);
-    countdownTimer = setInterval('secondPassed()', 1000);
+    $("#selectDifficulty").show();
+    $("#letters").show();
+    $("#words").show();
+  });
 
+  $("#letters").click(function(){
+    whichDifficulty = "letters";
+    difficultySelected = true;
+    $("#selectDifficulty").hide();
+    $("#letters").hide();
+    $("#words").hide();
+    if (whichVersion === "normal"){
+      generating = setInterval('generateRandomBubble()', 700);
+      countdownTimer = setInterval('secondPassed()', 1000);
+    }else{
+      generating_falling = setInterval('generateFallingBubble()', 500);
+      //calling the animation:
+      raf = window.requestAnimationFrame(draw);
+      countdownTimer = setInterval('secondPassed()', 1000);
+    }
+  });
+
+  $("#words").click(function(){
+    whichDifficulty = "words";
+    difficultySelected = true;
+    $("#selectDifficulty").hide();
+    $("#letters").hide();
+    $("#words").hide();
+    if (whichVersion === "normal"){
+      generating = setInterval('generateRandomBubble()', 700);
+      countdownTimer = setInterval('secondPassed()', 1000);
+    }else{
+      generating_falling = setInterval('generateFallingBubble()', 500);
+      //calling the animation:
+      raf = window.requestAnimationFrame(draw);
+      countdownTimer = setInterval('secondPassed()', 1000);
+    }
   });
 
 });
@@ -121,7 +155,7 @@ $("#startButtonPic").click(function(){
 //pause and resume button.
 var isPaused = true;
 $("#pauseResumeGame").click(function(){
-  if(startBtnPressed && !isGameOver && versionSelected){
+  if(startBtnPressed && !isGameOver && versionSelected && difficultySelected){
     if(isPaused){
       $("#countdown").hide();
       $("#pauseResume").html("Resume");
@@ -332,3 +366,32 @@ function checkFallingY(i){
       $("#score_val").html(score_value);
     }
 }
+
+
+//WORDS
+// var words = [];
+
+//getting the words from txt file:
+// var httpRequest = 0;
+//
+// $(document).ready(function(){
+//   if (window.XMLHttpRequest){ // Mozilla, Safari, IE7+ ...
+//       httpRequest = new XMLHttpRequest();
+//   }else if (window.ActiveXObject){ // IE 6 and older
+//       httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+//   }
+//
+//   httpRequest.onreadystatechange = getContents;
+//   httpRequest.open('GET', 'file:words.txt', true);
+//   httpRequest.send(null);
+// });
+//
+// function getContents(){
+//   if (httpRequest.readyState === 4) {
+//     if (httpRequest.status === 200) {
+//         console.log(httpRequest.responseText);
+//       }else {
+//         alert('There was a problem with the request.');
+//       }
+//   }
+// }
