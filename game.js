@@ -204,72 +204,106 @@ var y_coord = [];
 
 
 function generateRandomBubble(){
-  //getting a random index number to get a random letter from alphabet
-  var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
-  index = index % alphabet.length;
-  var random_letter = alphabet[index];
+  if (difficultySelected === "letters"){
+    //getting a random index number to get a random letter from alphabet
+    var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
+    index = index % alphabet.length;
+    var random_letter = alphabet[index];
 
-  //picking random coordinates: inclusive on both ends; Math.floor(Math.random() * (max - min + 1)) + min;
-  var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
-  var centery = Math.floor(Math.random() * ((canvas.height - 26) - 26 + 1)) + 26;
+    //picking random coordinates: inclusive on both ends; Math.floor(Math.random() * (max - min + 1)) + min;
+    var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
+    var centery = Math.floor(Math.random() * ((canvas.height - 26) - 26 + 1)) + 26;
 
-  //checking to make sure that the coordinates won't overlap each other
-  for (i=0; i< x_coord.length;i++){
-    if (Math.abs(centerx - x_coord[i]) <= 50 && Math.abs(centery - y_coord[i]) <= 50){
-      return;
+    //checking to make sure that the coordinates won't overlap each other
+    for (i=0; i< x_coord.length;i++){
+      if (Math.abs(centerx - x_coord[i]) <= 50 && Math.abs(centery - y_coord[i]) <= 50){
+        return;
+      }
     }
+
+    //so the program knows which letters to check for to delete and its coordinates
+    letters_to_delete.push(random_letter);
+    x_coord.push(centerx);
+    y_coord.push(centery);
+
+    //drawing the circle
+    ctx.beginPath();
+    ctx.arc(centerx+3, centery-4, 25, 0, 2 * Math.PI);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "black";
+    ctx.font = "20px serif";
+    ctx.fillText(random_letter, centerx , centery);
+    ctx.stroke();
+  }else if (difficultySelected === "words"){
+    //getting a random index number to get a random word from words array
+    var index = Math.floor((Math.random() * words.length - 1) + 1);
+    var random_word = words[index];
+
+    //picking random coordinates:
+    var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
+    var centery = Math.floor(Math.random() * ((canvas.height - 26) - 26 + 1)) + 26;
+
+    //checking to make sure that the coordinates won't overlap each other
+    for (i=0; i< x_coord.length;i++){
+      if (Math.abs(centerx - x_coord[i]) <= 50 && Math.abs(centery - y_coord[i]) <= 50){
+        return;
+      }
+    }
+
+    //so the program knows which letters to check for to delete and its coordinates
+    letters_to_delete.push(random_word);
+    x_coord.push(centerx);
+    y_coord.push(centery);
+
+    //drawing the circle
+    ctx.beginPath();
+    ctx.arc(centerx+3, centery-4, 25, 0, 2 * Math.PI);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "black";
+    ctx.font = "20px serif";
+    ctx.fillText(random_word, centerx , centery);
+    ctx.stroke();
   }
-
-  //so the program knows which letters to check for to delete and its coordinates
-  letters_to_delete.push(random_letter);
-  x_coord.push(centerx);
-  y_coord.push(centery);
-  // bubble_time.push(5);
-
-  //drawing the circle
-  ctx.beginPath();
-  ctx.arc(centerx+3, centery-4, 25, 0, 2 * Math.PI);
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = "black";
-  ctx.font = "20px serif";
-  ctx.fillText(random_letter, centerx , centery);
-  ctx.stroke();
 }
 
 
 $(document).keydown(function(event){
   if (isPaused && !isGameOver){
-    //this gets the keycode and converts the number to a lowercase letter
-    keynum = event.which;
-    letter_pressed = String.fromCharCode(keynum).toLowerCase();
+    if (difficultySelected === "letters"){
+      //this gets the keycode and converts the number to a lowercase letter
+      keynum = event.which;
+      letter_pressed = String.fromCharCode(keynum).toLowerCase();
 
-    //deleting. aka drawing over the thing.
-    for (var i = 0; i < letters_to_delete.length; i++){
-      if (letters_to_delete[i] === letter_pressed){
-        score_value += 100;
-        $("#popSound").ready(function() {play();});
-        $("#score_val").html(score_value);
-        ctx.beginPath();
-        ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
-        ctx.fillStyle = "lavender";
-        ctx.strokeStyle = "lavender";
-        ctx.fill();
-        ctx.stroke();
+      //deleting. aka drawing over the thing.
+      for (var i = 0; i < letters_to_delete.length; i++){
+        if (letters_to_delete[i] === letter_pressed){
+          score_value += 100;
+          $("#popSound").ready(function() {play();});
+          $("#score_val").html(score_value);
+          ctx.beginPath();
+          ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
+          ctx.fillStyle = "lavender";
+          ctx.strokeStyle = "lavender";
+          ctx.fill();
+          ctx.stroke();
 
-        letters_to_delete.splice(i, 1);
-        x_coord.splice(i, 1);
-        y_coord.splice(i, 1);
+          letters_to_delete.splice(i, 1);
+          x_coord.splice(i, 1);
+          y_coord.splice(i, 1);
 
-        //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
-        return;
-      }
-      else if(i === letters_to_delete.length - 1){
-        score_value -= 200;
-        if(score_value <= 0){
-          score_value = 0;
+          //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
+          return;
         }
-        $("#score_val").html(score_value);
+        else if(i === letters_to_delete.length - 1){
+          score_value -= 200;
+          if(score_value <= 0){
+            score_value = 0;
+          }
+          $("#score_val").html(score_value);
+        }
       }
+    }else if(difficultySelected === "words"){
+
     }
   }
 });
@@ -300,26 +334,33 @@ function bubble(random_letter, centerx, random_rate){
 
 function generateFallingBubble(){
   //getting a random index number to get a random letter from alphabet
-  var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
-  index = index % alphabet.length;
-  var random_letter = alphabet[index];
-  var random_rate = Math.ceil((Math.random() * 5 - 1) + 1);
+  if (difficultySelected === "letters"){
+    var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
+    index = index % alphabet.length;
+    var random_letter = alphabet[index];
+    var random_rate = Math.ceil((Math.random() * 5 - 1) + 1);
 
-  var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
+    var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
 
-  //checking to make sure that the coordinates won't overlap each other
-  for (i=0; i < falling_list.length;i++){
-    xdiff = Math.abs(centerx - falling_list[i].x);
-    ydiff = Math.abs(50 - falling_list[i].y);
-    if (xdiff <= 50){
-      return;
+    //checking to make sure that the coordinates won't overlap each other
+    for (i=0; i < falling_list.length;i++){
+      xdiff = Math.abs(centerx - falling_list[i].x);
+      ydiff = Math.abs(50 - falling_list[i].y);
+      if (xdiff <= 50){
+        return;
+      }
     }
-  }
 
-  //creating the circle
-  var circle = new bubble(random_letter, centerx, random_rate);
-  circle.draw();
-  falling_list.push(circle);
+    //creating the circle
+    var circle = new bubble(random_letter, centerx, random_rate);
+    circle.draw();
+    falling_list.push(circle);
+  // }else if (difficultySelected === "words"){
+  //   var index = Math.floor((Math.random() * words.length - 1) + 1);
+  //   var random_word = words[index];
+  //   var random_rate = Math.ceil((Math.random() * 5 - 1) + 1);
+  //
+  // }
 }
 
 //drawing the new position of the circle when it 'moves'
@@ -383,8 +424,7 @@ function checkFallingY(i){
 
 
 //WORDS
-
-$.get( "/words", function(words){
-  var separate = words.split('\n');
-  console.log(separate);
+var words = 0;
+$.get( "/words", function(text){
+  words = text.split('\n');
 });

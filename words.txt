@@ -15,7 +15,6 @@ on
 are
 with
 as
-I
 his
 they
 be
@@ -352,7 +351,7 @@ heard
 best
 hour
 better
-true .
+true
 during
 hundred
 five
