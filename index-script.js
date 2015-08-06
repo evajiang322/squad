@@ -1,5 +1,3 @@
-
-
 $(function(){
 
   $("#gameRules").hide();
@@ -26,10 +24,7 @@ $(function(){
     }
 
   });
-  $('#sup').click(function() {
-      window.location.href = 'game';
-      return false;
-  });
+
   //if you clicked the about tag
   $("#aboutTheGame").click(function(){
 
