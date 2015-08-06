@@ -70,7 +70,7 @@ class ScoreboardHandler(webapp2.RequestHandler):
         if len(name) == 0:
             name = "Anonymous"
         elif len(name) > 3:
-            name = name[3]
+            name = name[0:3]
         score = self.request.get('user_score')
         # points = self.request.get('points')
         # user = User(name=name, points=int(points))
