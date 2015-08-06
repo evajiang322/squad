@@ -13,6 +13,7 @@
   $(".forms").html("Submit<br />Score");
   $("input").hide();
   $("input").prop('disabled', true);
+  $("#typing").hide();
 
 
 
@@ -171,6 +172,7 @@ $("#startButtonPic").click(function(){
     $("#selectDifficulty").hide();
     $("#letters").hide();
     $("#words").hide();
+    $("#typing").show();
     if (whichVersion === "normal"){
       generating = setInterval('generateRandomBubble()', 900);
       countdownTimer = setInterval('secondPassed()', 1000);
@@ -194,6 +196,7 @@ $("#pauseResumeGame").click(function(){
       $("#countdown").hide();
       $("#pauseResume").html("Resume");
       $("#paused").show();
+      $("#typing").hide();
       clearInterval(generating);
       clearInterval(countdownTimer);
       if (whichVersion === "falling"){
@@ -203,6 +206,7 @@ $("#pauseResumeGame").click(function(){
     }else{
       $("#pauseResume").html("Pause");
       $("#countdown").show();
+      $("#typing").show();
       if (whichVersion === "normal"){
         if (whichDifficulty === "letters"){
           generating = setInterval('generateRandomBubble()', 700);
@@ -295,6 +299,11 @@ function generateRandomBubble(){
   }
 }
 
+$(document).on("keydown", function (e) {
+    if (e.which === 8 && !$(e.target).is("input, textarea")) {
+        e.preventDefault();
+    }
+});
 
 $(document).keydown(function(event){
   if (isPaused && !isGameOver && whichVersion === "normal"){
@@ -334,14 +343,20 @@ $(document).keydown(function(event){
       }
     }else if (whichDifficulty === "words"){
       keynum = event.which;
+      console.log(keynum);
+      // if (keynum === 8){
+      //   alert("yo");
+      // }
       //checking if the key pressed was anything but a space
       if (keynum !== 32){
         letter_pressed = String.fromCharCode(keynum).toLowerCase();
         word_typed = word_typed + letter_pressed;
+        $("#type_val").html(word_typed);
       }else if (keynum === 32){
         for(i=0; i< to_delete.length; i++){
           if (to_delete[i] === word_typed){
             word_typed = "";
+            $("#type_val").html(word_typed);
             score_value += 100;
             $("#popSound").ready(function() {play();});
             $("#score_val").html(score_value);
@@ -360,6 +375,7 @@ $(document).keydown(function(event){
             return;
           }else if(i === to_delete.length - 1){
             word_typed = "";
+            $("#type_val").html(word_typed);
             console.log(word_typed);
             $("#wrongMp3").ready(function(){ incorrectPlay();});
             score_value -= 200;
@@ -494,10 +510,12 @@ $(document).keydown(function(event){
       if (keynum !== 32){
         letter_pressed = String.fromCharCode(keynum).toLowerCase();
         word_typed = word_typed + letter_pressed;
+        $("#type_val").html(word_typed);
       }else if (keynum === 32){
         for(i=0; i< falling_list.length; i++){
           if (falling_list[i].letter === word_typed){
             word_typed = "";
+            $("#type_val").html(word_typed);
             score_value += 100;
             $("#popSound").ready(function() {play();});
             $("#score_val").html(score_value);
@@ -512,6 +530,7 @@ $(document).keydown(function(event){
             return;
           }else if(i === falling_list.length - 1){
             word_typed = "";
+            $("#type_val").html(word_typed);
             console.log(word_typed);
             $("#wrongMp3").ready(function(){ incorrectPlay();});
             score_value -= 200;

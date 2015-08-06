@@ -232,6 +232,17 @@ cursor:pointer;
 
 }
 
+#typing{
+  color:white;
+  position:absolute;
+  text-align:center;
+  width:100px;
+  margin-left: 740px;
+  margin-top: 600px;
+  border-style:dotted;
+  padding:10px;
+}
+
 h3{
   text-decoration: underline;
   padding:10px;
