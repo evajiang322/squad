@@ -84,9 +84,15 @@ class WordsHandler(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('words.txt')
         self.response.write(template.render())
 
+class AboutUsHandler(webapp2.RequestHandler):
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('aboutus.html')
+        self.response.write(template.render())
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/scoreboard', ScoreboardHandler),
     ('/game', GameHandler),
-    ('/words', WordsHandler)
+    ('/words', WordsHandler),
+    ('/aboutus', AboutUsHandler)
 ], debug=True)
