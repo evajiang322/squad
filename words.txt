@@ -238,7 +238,6 @@ draw
 left
 late
 run
-don't
 while
 press
 close
@@ -663,9 +662,7 @@ spring
 observe
 child
 straight
-consonant
 nation
-dictionary
 milk
 speed
 method
@@ -684,7 +681,6 @@ cool
 design
 poor
 lot
-experiment
 bottom
 key
 iron
