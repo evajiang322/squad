@@ -60,7 +60,7 @@ $("#sound").click(function(){
 
 
 // countdown timer
-var seconds = 59;
+var seconds = 29;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
