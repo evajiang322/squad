@@ -9,6 +9,7 @@
   $("#countdown").hide();
 
 
+
 //for scope issues
 var score_value = 0;
 var generating = 0;
@@ -91,6 +92,10 @@ function finishPlay(){
     var audio = document.getElementById("timesUpMp3");
     audio.play();
 }
+
+function incorrectPlay()
+{ var audio = document.getElementById("wrongMp3");
+audio.play();}
 
 
 //start
@@ -231,6 +236,7 @@ $(document).keydown(function(event){
         return;
       }
       else if(i === letters_to_delete.length - 1){
+        $("#wrongMp3").ready(function(){ incorrectPlay();});
         score_value -= 200;
         if(score_value <= 0){
           score_value = 0;
