@@ -1,5 +1,4 @@
 $(function(){
-
   $("#gameRules").hide();
   $("#aboutGame").hide();
   var gameRulesView = false;
