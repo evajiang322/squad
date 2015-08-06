@@ -60,7 +60,7 @@ $("#sound").click(function(){
 
 
 // countdown timer
-var seconds = 30;
+var seconds = 15;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -218,6 +218,7 @@ $("#pauseResumeGame").click(function(){
       }
       if (whichVersion === "falling"){
         raf = window.requestAnimationFrame(draw);
+        countdownTimer = setInterval('secondPassed()', 1000);
       }
       $("#paused").hide();
     }
