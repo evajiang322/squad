@@ -47,7 +47,11 @@
     </div>
 
     <div id="submitScoreBtn">
-        <a href="/scoreboard">
+      <form action="/scoreboard" method="post">
+        <div>Name: <input name="name"></input></div>
+        <div><input type="submit" value="Add User"></div>
+        <div><input id = "score" type = "hidden" name="user_score"></div>
+      </form>
       <h4>Submit Score</h4>
     </a>
     </div>
