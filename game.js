@@ -54,7 +54,7 @@ $("#sound").click(function(){
 
 
 // countdown timer
-var seconds = 59;
+var seconds = 5;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -340,6 +340,7 @@ $(document).keydown(function(event){
       }
       //if the key pressed does not match any of the letters on screen
       else if(i === falling_list.length - 1){
+        $("#wrongMp3").ready(function(){ incorrectPlay();});
         score_value -= 50;
         if(score_value <= 0){
           score_value = 0;

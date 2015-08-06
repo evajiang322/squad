@@ -30,15 +30,8 @@ td{
   margin-left:-20px;
 }
 
-#placedScore{
-  background-color: #BEF243;
-  padding:5px;
-  color:white;
-  width:300px;
-}
 
-
-#placedUserName{
+#placedUserName, #placedScores{
   background-color: #FF6AA6;
   padding:5px;
   color: black;
