@@ -299,12 +299,6 @@ function generateRandomBubble(){
   }
 }
 
-$(document).on("keydown", function (e) {
-    if (e.which === 8 && !$(e.target).is("input, textarea")) {
-        e.preventDefault();
-    }
-});
-
 $(document).keydown(function(event){
   if (isPaused && !isGameOver && whichVersion === "normal"){
     if (whichDifficulty === "letters"){
@@ -563,4 +557,11 @@ function checkFallingY(i){
 var words = 0;
 $.get( "/words", function(text){
   words = text.split('\n');
+});
+
+//backspace issue
+$(document).on("keydown", function (e) {
+    if (e.which === 8 && !$(e.target).is("input, textarea")) {
+        e.preventDefault();
+    }
 });
