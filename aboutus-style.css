@@ -1,0 +1,92 @@
+@import url(http://fonts.googleapis.com/css?family=Advent+Pro:400,200);
+
+body{
+  background-color: black;
+  color:white;
+  text-align: center;
+  font-family: 'Advent Pro', sans-serif;
+}
+
+span{
+  text-transform: uppercase;
+  padding-bottom: 10px;
+}
+
+h2{
+  text-align: center;
+  font-size:36pt;
+  color:cyan;
+}
+
+img{
+  width: 100%;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+#aboutPaul, #aboutEva, #aboutNicole{
+  text-align: center;
+  width:30%;
+  width:280px;
+  padding:10px;
+  padding-top:50px;
+  padding-bottom: 30px;
+  margin-top:-30px;
+  border-radius: 30px;
+}
+
+#aboutPaul {
+  background-color: darkblue;
+}
+
+#aboutEva {
+  background-color: darkturquoise;
+}
+
+#aboutNicole {
+  background-color: lightskyblue;
+}
+
+#goHome{
+  background-color: coral;
+  margin-top:-280px;
+  margin-left:-12%;
+  text-align: right;
+}
+
+#goHome:hover{
+  background-color:coral;
+  margin-top:10px;
+  text-align: left;
+}
+
+#eva{
+  margin-left:40%;
+}
+
+#nicole{
+  margin-left:70%;
+}
+
+#paul, #eva, #nicole{
+  position:fixed;
+  width:300px;
+}
+
+#paul{
+  margin-left: 10%;
+}
+
+.sidetabs{
+  transform: rotate(-90deg);
+  font-size: 24pt;
+  background-color:red;
+  text-align:left;
+  position:fixed;
+  border-radius: 10px;
+  margin-top: -300px;
+  padding: 5px;
+  padding-right:200px;
+  color:white;
+  width:200px;
+}

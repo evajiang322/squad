@@ -73,6 +73,20 @@ body {
   z-index: 1;
 }
 
+#aboutus{
+  background-color: coral;
+  margin-top:-180px;
+  margin-left:-12%;
+  text-align: right;
+}
+
+#aboutus:hover{
+  background-color:lightcoral;
+  margin-top:10px;
+  text-align: left;
+}
+
+
 #goToGame{
   background-color: darkcyan;
   margin-top:-180px;
