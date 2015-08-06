@@ -7,6 +7,9 @@
   $("#fallingButton").hide();
   $("#selectVersionPrompt").hide();
   $("#countdown").hide();
+  $("#selectDifficulty").hide();
+  $("#letters").hide();
+  $("#words").hide();
   $(".forms").html("Submit<br />Score");
   $("input").hide();
   $("input").prop('disabled', true);
@@ -22,11 +25,14 @@ var isGameOver = false;
 var countdownTimer = 0;
 var versionSelected = false;
 var whichVersion = "...";
+var difficultySelected = false;
+var whichDifficulty = "..";
 var volumeOn = true;
 var allSoundsPop = document.getElementById('popSound');
 var allSoundsTime = document.getElementById('timesUpMp3');
 var generating_falling = 0;
 var raf = 0;
+var word_typed = "";
 
 //let the user turn the volume on or off
 $("#sound").click(function(){
@@ -53,7 +59,7 @@ $("#sound").click(function(){
 
 
 // countdown timer
-var seconds = 5;
+var seconds = 59;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -124,10 +130,9 @@ $("#startButtonPic").click(function(){
     $("#staticButton").hide();
     $("#fallingButton").hide();
     $("#selectVersionPrompt").hide();
-    $("#staticButton").hide();
-    $("#fallingButton").hide();
-    generating = setInterval('generateRandomBubble()', 700);
-    countdownTimer = setInterval('secondPassed()', 1000);
+    $("#selectDifficulty").show();
+    $("#letters").show();
+    $("#words").show();
 
   });
 
@@ -137,11 +142,44 @@ $("#startButtonPic").click(function(){
     $("#staticButton").hide();
     $("#fallingButton").hide();
     $("#selectVersionPrompt").hide();
-    generating_falling = setInterval('generateFallingBubble()', 500);
-    //calling the animation:
-    raf = window.requestAnimationFrame(draw);
-    countdownTimer = setInterval('secondPassed()', 1000);
+    $("#selectDifficulty").show();
+    $("#letters").show();
+    $("#words").show();
 
+  });
+
+  $("#letters").click(function(){
+    whichDifficulty = "letters";
+    difficultySelected = true;
+    $("#selectDifficulty").hide();
+    $("#letters").hide();
+    $("#words").hide();
+    if (whichVersion === "normal"){
+      generating = setInterval('generateRandomBubble()', 700);
+      countdownTimer = setInterval('secondPassed()', 1000);
+    }else if (whichVersion === "falling"){
+      generating_falling = setInterval('generateFallingBubble()', 500);
+      //calling the animation:
+      raf = window.requestAnimationFrame(draw);
+      countdownTimer = setInterval('secondPassed()', 1000);
+    }
+  });
+
+  $("#words").click(function(){
+    whichDifficulty = "words";
+    difficultySelected = true;
+    $("#selectDifficulty").hide();
+    $("#letters").hide();
+    $("#words").hide();
+    if (whichVersion === "normal"){
+      generating = setInterval('generateRandomBubble()', 900);
+      countdownTimer = setInterval('secondPassed()', 1000);
+    }else if (whichVersion === "falling"){
+      generating_falling = setInterval('generateFallingBubble()', 700);
+      //calling the animation:
+      raf = window.requestAnimationFrame(draw);
+      countdownTimer = setInterval('secondPassed()', 1000);
+    }
   });
 
 });
@@ -151,21 +189,32 @@ $("#startButtonPic").click(function(){
 //pause and resume button.
 var isPaused = true;
 $("#pauseResumeGame").click(function(){
-  if(startBtnPressed && !isGameOver && versionSelected){
+  if(startBtnPressed && !isGameOver && versionSelected && difficultySelected){
     if(isPaused){
       $("#countdown").hide();
       $("#pauseResume").html("Resume");
       $("#paused").show();
       clearInterval(generating);
       clearInterval(countdownTimer);
-      //stopping the animation:
-      window.cancelAnimationFrame(raf);
+      if (whichVersion === "falling"){
+        //stopping the animation:
+        window.cancelAnimationFrame(raf);
+      }
     }else{
       $("#pauseResume").html("Pause");
       $("#countdown").show();
-      generating = setInterval('generateRandomBubble()', 1000);
-      countdownTimer = setInterval('secondPassed()', 1000);
-      raf = window.requestAnimationFrame(draw);
+      if (whichVersion === "normal"){
+        if (whichDifficulty === "letters"){
+          generating = setInterval('generateRandomBubble()', 700);
+          countdownTimer = setInterval('secondPassed()', 1000);
+        }else if (whichDifficulty === "words"){
+          generating = setInterval('generateRandomBubble()', 900);
+          countdownTimer = setInterval('secondPassed()', 1000);
+        }
+      }
+      if (whichVersion === "falling"){
+        raf = window.requestAnimationFrame(draw);
+      }
       $("#paused").hide();
     }
     isPaused = !isPaused;
@@ -178,79 +227,148 @@ var c = document.getElementById("canvas");
 var ctx = c.getContext("2d");
 
 var alphabet = ["a","b","c","d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var letters_to_delete = [];
+var to_delete = [];
 var x_coord = [];
 var y_coord = [];
-// var bubble_time = [];
 
 
 function generateRandomBubble(){
-  //getting a random index number to get a random letter from alphabet
-  var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
-  index = index % alphabet.length;
-  var random_letter = alphabet[index];
+  if (whichDifficulty === "letters"){
+    //getting a random index number to get a random letter from alphabet
+    var index = Math.floor((Math.random() * alphabet.length - 1) + 1);
+    index = index % alphabet.length;
+    var random_letter = alphabet[index];
 
-  //picking random coordinates: inclusive on both ends; Math.floor(Math.random() * (max - min + 1)) + min;
-  var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
-  var centery = Math.floor(Math.random() * ((canvas.height - 26) - 26 + 1)) + 26;
+    //picking random coordinates: inclusive on both ends; Math.floor(Math.random() * (max - min + 1)) + min;
+    var centerx = Math.floor(Math.random() * ((canvas.width - 26) - 26 + 1)) + 26;
+    var centery = Math.floor(Math.random() * ((canvas.height - 26) - 26 + 1)) + 26;
 
-  //checking to make sure that the coordinates won't overlap each other
-  for (i=0; i< x_coord.length;i++){
-    if (Math.abs(centerx - x_coord[i]) <= 50 && Math.abs(centery - y_coord[i]) <= 50){
-      return;
+    //checking to make sure that the coordinates won't overlap each other
+    for (i=0; i< x_coord.length;i++){
+      if (Math.abs(centerx - x_coord[i]) <= 50 && Math.abs(centery - y_coord[i]) <= 50){
+        return;
+      }
     }
+
+    //so the program knows which letters to check for to delete and its coordinates
+    to_delete.push(random_letter);
+    x_coord.push(centerx);
+    y_coord.push(centery);
+
+    //drawing the circle
+    ctx.beginPath();
+    ctx.arc(centerx+3, centery-4, 25, 0, 2 * Math.PI);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "black";
+    ctx.font = "20px serif";
+    ctx.fillText(random_letter, centerx , centery);
+    ctx.stroke();
+  }else if (whichDifficulty === "words"){
+    //getting random word from list
+    var index = Math.floor((Math.random() * words.length - 1) + 1);
+    var random_word = words[index];
+
+    //picking random coordinates
+    var centerx = Math.floor(Math.random() * ((canvas.width - 41) - 41 + 1)) + 41;
+    var centery = Math.floor(Math.random() * ((canvas.height - 41) - 41 + 1)) + 41;
+
+    //checking to make sure that the coordinates won't overlap each other
+    for (i=0; i< x_coord.length;i++){
+      if (Math.abs(centerx - x_coord[i]) <= 80 && Math.abs(centery - y_coord[i]) <= 80){
+        return;
+      }
+    }
+
+    //so the program knows which letters to check for to delete and its coordinates
+    to_delete.push(random_word);
+    x_coord.push(centerx);
+    y_coord.push(centery);
+
+    //drawing the circle
+    ctx.beginPath();
+    ctx.arc(centerx+25, centery-4, 40, 0, 2 * Math.PI);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "black";
+    ctx.font = "18px serif";
+    ctx.fillText(random_word, centerx , centery);
+    ctx.stroke();
   }
-
-  //so the program knows which letters to check for to delete and its coordinates
-  letters_to_delete.push(random_letter);
-  x_coord.push(centerx);
-  y_coord.push(centery);
-  // bubble_time.push(5);
-
-  //drawing the circle
-  ctx.beginPath();
-  ctx.arc(centerx+3, centery-4, 25, 0, 2 * Math.PI);
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = "black";
-  ctx.font = "20px serif";
-  ctx.fillText(random_letter, centerx , centery);
-  ctx.stroke();
 }
 
 
 $(document).keydown(function(event){
-  if (isPaused && !isGameOver){
-    //this gets the keycode and converts the number to a lowercase letter
-    keynum = event.which;
-    letter_pressed = String.fromCharCode(keynum).toLowerCase();
+  if (isPaused && !isGameOver && whichVersion === "normal"){
+    if (whichDifficulty === "letters"){
+      //this gets the keycode and converts the number to a lowercase letter
+      keynum = event.which;
+      letter_pressed = String.fromCharCode(keynum).toLowerCase();
 
-    //deleting. aka drawing over the thing.
-    for (var i = 0; i < letters_to_delete.length; i++){
-      if (letters_to_delete[i] === letter_pressed){
-        score_value += 100;
-        $("#popSound").ready(function() {play();});
-        $("#score_val").html(score_value);
-        ctx.beginPath();
-        ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
-        ctx.fillStyle = "lavender";
-        ctx.strokeStyle = "lavender";
-        ctx.fill();
-        ctx.stroke();
+      //deleting. aka drawing over the thing.
+      for (var i = 0; i < to_delete.length; i++){
+        if (to_delete[i] === letter_pressed){
+          score_value += 100;
+          $("#popSound").ready(function() {play();});
+          $("#score_val").html(score_value);
+          ctx.beginPath();
+          ctx.arc(x_coord[i]+3, y_coord[i]-4, 26, 0, 2 * Math.PI);
+          ctx.fillStyle = "lavender";
+          ctx.strokeStyle = "lavender";
+          ctx.fill();
+          ctx.stroke();
 
-        letters_to_delete.splice(i, 1);
-        x_coord.splice(i, 1);
-        y_coord.splice(i, 1);
+          to_delete.splice(i, 1);
+          x_coord.splice(i, 1);
+          y_coord.splice(i, 1);
 
-        //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
-        return;
-      }
-      else if(i === letters_to_delete.length - 1){
-        $("#wrongMp3").ready(function(){ incorrectPlay();});
-        score_value -= 200;
-        if(score_value <= 0){
-          score_value = 0;
+          //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
+          return;
         }
-        $("#score_val").html(score_value);
+        else if(i === to_delete.length - 1){
+          $("#wrongMp3").ready(function(){ incorrectPlay();});
+          score_value -= 200;
+          if(score_value <= 0){
+            score_value = 0;
+          }
+          $("#score_val").html(score_value);
+        }
+      }
+    }else if (whichDifficulty === "words"){
+      keynum = event.which;
+      //checking if the key pressed was anything but a space
+      if (keynum !== 32){
+        letter_pressed = String.fromCharCode(keynum).toLowerCase();
+        word_typed = word_typed + letter_pressed;
+      }else if (keynum === 32){
+        for(i=0; i< to_delete.length; i++){
+          if (to_delete[i] === word_typed){
+            word_typed = "";
+            score_value += 100;
+            $("#popSound").ready(function() {play();});
+            $("#score_val").html(score_value);
+            ctx.beginPath();
+            ctx.arc(x_coord[i]+25, y_coord[i]-4, 41, 0, 2 * Math.PI);
+            ctx.fillStyle = "lavender";
+            ctx.strokeStyle = "lavender";
+            ctx.fill();
+            ctx.stroke();
+
+            to_delete.splice(i, 1);
+            x_coord.splice(i, 1);
+            y_coord.splice(i, 1);
+
+            //return is to delete only one; i-- : if you want to delete all of a certain letter on screen
+            return;
+          }else if(i === to_delete.length - 1){
+            word_typed = "";
+            console.log(word_typed);
+            $("#wrongMp3").ready(function(){ incorrectPlay();});
+            score_value -= 200;
+            if(score_value <= 0){
+              score_value = 0;
+            }
+            $("#score_val").html(score_value);
+          }
+        }
       }
     }
   }
@@ -261,7 +379,6 @@ $("#score_val").html(score_value);
 
 // FOR BUBBLES TO FALL DOWN THE CANVAS:
 var falling_list = [];
-
 
 function bubble(random_letter, centerx, random_rate){
   this.x = centerx;
@@ -316,7 +433,7 @@ function draw() {
 }
 
 $(document).keydown(function(event){
-  if (isPaused && !isGameOver){
+  if (isPaused && !isGameOver && whichVersion === "falling"){
     //this gets the keycode and converts the number to a lowercase letter
     keynum = event.which;
     letter_pressed = String.fromCharCode(keynum).toLowerCase();
@@ -363,3 +480,9 @@ function checkFallingY(i){
       $("#score_val").html(score_value);
     }
 }
+
+//WORDS
+var words = 0;
+$.get( "/words", function(text){
+  words = text.split('\n');
+});
