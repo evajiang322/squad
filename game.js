@@ -68,6 +68,7 @@ function secondPassed() {
         clearInterval(countdownTimer);
         document.getElementById('countdown').innerHTML = "Time's Up!";
         $("#gameOverPic").show();
+        $("#score").attr("value", score_value)
         isGameOver = true;
         window.cancelAnimationFrame(raf);
         $("#timesUpMp3").ready(function() {finishPlay();});
