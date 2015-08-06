@@ -15,6 +15,11 @@ table{
   padding:10px;
 }
 
+td{
+  width:300px;
+  text-transform: uppercase;
+}
+
 #goToGame{
   background-color: orange;
   margin-top:120px;
