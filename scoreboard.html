@@ -6,7 +6,6 @@
     <title>Scoreboard</title>
   </head>
   <body>
-
       <a href="/game">
         <div class="sidetabs" id="goToGame">
           Go To Game
@@ -18,12 +17,6 @@
         Go Home
       </div>
       </a>
-
-    <form action="/scoreboard" method="post">
-      <div>Name: <input name="name"></input></div>
-      <div><input type="submit" value="Add User"></div>
-      <div><input type = "hidden" name="user_score"></div>
-    </form>
     <hr />
     <TABLE BORDER="3" CELLSPACING="1" CELLPADDING="1">
     <h2>Scores</h2>
@@ -33,10 +26,11 @@
       </ul>
     {% endfor %}
   </TD>
-    <td>
-      {% for n in points:%}
-      <ul id = "placedScore"> {{ n }} </ul>
+    <td> {% for user in users %}
+      <ul> {{user.score}}
+      </ul>
       {% endfor %}
+  </form>
       </td>
   </TD>
     </TR>
