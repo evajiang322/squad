@@ -14,7 +14,7 @@
     </h2>
     <br />
 
-    <img id = "startButtonPic" src = "http://oyster.ignimgs.com/wordpress/stg.ign.com/2014/03/Space-Invaders.jpg" />
+    <img id = "startButtonPic" src = "https://lh3.googleusercontent.com/QavE2flymvuWv_bHHCI-OisLi8sW5NDZqmPcYIL1qFY=w610-h350-no" />
     <img id = "paused" src="http://www.cs.duke.edu/courses/fall10/cps108/code/src/vooga/games/towerdefense/resources/images/pauseScreen.gif" />
     <img id = "gameOverPic" src="http://i.ytimg.com/vi/vJaAy3jmEx8/maxresdefault.jpg" />
     <!-- Picture changes when sound changes -->
@@ -40,12 +40,13 @@
     <div id="countdown" class="timer">
     Timer</div>
 
+    <a href="/">
     <div id="goHome">
-        <a href="/">
       <h4>Return to Main Page</h4>
-    </a>
     </div>
+  </a>
 
+    <a href="/scoreboard">
     <div id="submitScoreBtn">
       <form action="/scoreboard" method="post">
         <div>Name: <input name="name"></input></div>
@@ -53,17 +54,19 @@
         <div><input id = "score" type = "hidden" name="user_score"></div>
       </form>
       <h4>Submit Score</h4>
-    </a>
     </div>
+  </a>
 
+    <a href="/game">
     <div id="restartGame">
-        <a href="/game">
+
       <h4>Restart Game</h4>
-    </a>
     </div>
+  </a>
 
 <audio src='http://soundbible.com/grab.php?id=2067&type=mp3' id="popSound" display="none"></audio>
 <audio src='http://soundbible.com/grab.php?id=787&type=mp3' id="timesUpMp3" display="none"></audio>
+<audio src='http://soundbible.com/grab.php?id=1669&type=mp3' id="TenSecBeep" display="none"></audio>
 
   <h2 id="selectVersionPrompt">Which version would you like to play?</h2>
   <div id="staticButton">

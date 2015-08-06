@@ -21,6 +21,7 @@ var volumeOn = true;
 var allSoundsPop = document.getElementById('popSound');
 var allSoundsTime = document.getElementById('timesUpMp3');
 var generating_falling = 0;
+var raf = 0;
 
 //let the user turn the volume on or off
 $("#sound").click(function(){
@@ -47,7 +48,7 @@ $("#sound").click(function(){
 
 
 // countdown timer
-var seconds = 59;
+var seconds = 10;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -55,6 +56,12 @@ function secondPassed() {
         remainingSeconds = "0" + remainingSeconds;
     }
     document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
+
+    if(seconds<=5 && seconds>0)
+      $("#TenSecBeep").ready(function(){
+        tenSecPlay();
+      })
+
     if (seconds == 0) {
         clearInterval(generating);
         clearInterval(countdownTimer);
@@ -73,6 +80,11 @@ function secondPassed() {
 //pop sound
 function play(){
        var audio = document.getElementById("popSound");
+       audio.play();
+}
+
+function tenSecPlay(){
+       var audio = document.getElementById("TenSecBeep");
        audio.play();
 }
 
@@ -235,7 +247,7 @@ $("#score_val").html(score_value);
 
 // FOR BUBBLES TO FALL DOWN THE CANVAS:
 var falling_list = [];
-var raf = 0;
+
 
 function bubble(random_letter, centerx, random_rate){
   this.x = centerx;

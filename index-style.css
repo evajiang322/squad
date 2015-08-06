@@ -29,7 +29,7 @@ body {
 
 #aboutPaul{
   background-color: #FF0066;
-  margin-left:400px;
+  margin-left:70%;
 }
 
 #aboutPaul:hover{
@@ -38,7 +38,7 @@ body {
 
 #aboutEva{
   background-color: #66FF66;
-  margin-left:450px;
+  margin-left:73%;
 }
 
 #aboutEva:hover{
@@ -47,14 +47,14 @@ body {
 
 #aboutNicole{
   background-color: #3399FF;
-  margin-left:500px;
+  margin-left:76%;
 }
 
 #aboutNicole:hover{
   margin-top:-10px;
 }
 
-#aboutGame, #gameRules{
+#aboutGame, #gameRules {
 
   position:absolute;
   margin-left:530px;
@@ -67,42 +67,71 @@ body {
   cursor:default;
 }
 
+#aboutBG {
+  background-color: gray;
+  opacity: 0.3;
+  z-index: 1;
+}
+
 #goToGame{
-  background-color: orange;
-  margin-top:370px;
+  background-color: darkcyan;
+  margin-top:-180px;
+  margin-left:76%;
+  text-align: right;
 }
 
 #goToGame:hover{
-  background-color:yellow;
-  margin-left:-20px;
+  background-color:turquoise;
+  margin-top:90px;
+  text-align: left;
 }
 
 #rules{
-  background-color: #990000;
-  margin-top:300px;
+  background-color: salmon;
+  margin-top:-180px;
+  margin-left:72%;
+  text-align: right;
 }
 
 #rules:hover{
-  background-color: #FF0000;
-  margin-left:-20px;
+  background-color: tomato;
+  cursor: pointer;
+  margin-top:60px;
+  text-align: left;
+}
+
+#aboutTheGame{
+  background-color: #FFFF66;
+  margin-left:68%;
+  margin-top:-180px;
+  text-align: right;
+}
+
+#aboutTheGame:hover{
+  background-color: yellowgreen;
+  margin-top:30px;
+  text-align: left;
   cursor: pointer;
 }
 
-#scoreboard{
-background-color: #CC00FF;
-  margin-top:440px;
 
+#scoreboard{
+  background-color: #CC00FF;
+  margin-left:80%;
+  margin-top:-180px;
+  text-align: right;
 }
 
 #scoreboard:hover{
   background-color: #FF0066;
-  margin-left:-20px;
+  margin-top:120px;
+  text-align: left;
 }
 
 .abouts{
   position:fixed;
   border-radius: 10px;
-  margin-top:-30px;
+  margin-top:-100px;
   padding: 10px;
   padding-top:100px;
   color:white;
@@ -110,24 +139,25 @@ background-color: #CC00FF;
 }
 
 .sidetabs{
+  transform: rotate(-90deg);
   font-size: 24pt;
   background-color:red;
-  text-align:right;
+  text-align:left;
   position:fixed;
   border-radius: 10px;
-  margin-left:-100px;
+  margin-top: -300px;
   padding: 5px;
-  padding-left:200px;
+  padding-right:200px;
   color:white;
   width:200px;
 }
 
 h2{
-  position:fixed;
+  position: fixed;
   color: blue;
-  margin-top:90px;
-  margin-left:2px;
-  font-size:20pt;
+  margin-top:0px;
+  margin-left:300px;
+  font-size:200pt;
 
 }
 
