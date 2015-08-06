@@ -60,7 +60,7 @@ $("#sound").click(function(){
 
 
 // countdown timer
-var seconds = 29;
+var seconds = 30;
 function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
@@ -342,11 +342,11 @@ $(document).keydown(function(event){
       //   alert("yo");
       // }
       //checking if the key pressed was anything but a space
-      if (keynum !== 32){
+      if (keynum !== 32 && keynum !== 13){
         letter_pressed = String.fromCharCode(keynum).toLowerCase();
         word_typed = word_typed + letter_pressed;
         $("#type_val").html(word_typed);
-      }else if (keynum === 32){
+      }else if (keynum === 32 || keynum === 13){
         for(i=0; i< to_delete.length; i++){
           if (to_delete[i] === word_typed){
             word_typed = "";
@@ -501,11 +501,11 @@ $(document).keydown(function(event){
     }else if (whichDifficulty === "words"){
       keynum = event.which;
       //checking if the key pressed was anything but a space
-      if (keynum !== 32){
+      if (keynum !== 32 && keynum!== 13){
         letter_pressed = String.fromCharCode(keynum).toLowerCase();
         word_typed = word_typed + letter_pressed;
         $("#type_val").html(word_typed);
-      }else if (keynum === 32){
+      }else if (keynum === 32 || keynum === 13){
         for(i=0; i< falling_list.length; i++){
           if (falling_list[i].letter === word_typed){
             word_typed = "";
@@ -527,7 +527,7 @@ $(document).keydown(function(event){
             $("#type_val").html(word_typed);
             console.log(word_typed);
             $("#wrongMp3").ready(function(){ incorrectPlay();});
-            score_value -= 200;
+            score_value -= 50;
             if(score_value <= 0){
               score_value = 0;
             }
