@@ -18,19 +18,18 @@
       </div>
     </a>
     <TABLE BORDER="3" CELLSPACING="1" CELLPADDING="1">
-    <h2>Scores</h2>
+    <h2>Top 10 Scores</h2>
     <tr>
     <td id="usernames">  {% for user in users %}
-      <ul id = "placedUserName">{{ user.name }}
+      <ul id = "placedUserName">{{user.name}}
       </ul>
     {% endfor %}
-  </TD>
+  </td>
     <td id="scores"> {% for user in users %}
-      <ul> {{user.score}}
+      <ul id="placedScores"> {{user.score}}
       </ul>
       {% endfor %}
       </td>
-  </TD>
     </TR>
   </TABLE>
 

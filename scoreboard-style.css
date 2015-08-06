@@ -16,7 +16,8 @@ table{
 }
 
 td{
-  width:300px;
+  width:310px;
+  padding:2px;
   text-transform: uppercase;
 }
 
@@ -30,20 +31,30 @@ td{
   margin-left:-20px;
 }
 
-#placedScore{
-  background-color: #BEF243;
-  padding:5px;
-  color:white;
-  width:300px;
+#placedUserName, #placedScores{
+  background-color: #FF6AA6;
+  padding:10px;
+  color: black;
+  width: 300px;
+  height: 35px;
 }
-
 
 #placedUserName{
-  background-color: #FF6AA6;
-  padding:5px;
+  padding: 5px;
   color: black;
-  width:300px;
+  width: 300px;
+  height: 35px;
 }
+
+#placedScores{
+  background-color: greenyellow;
+  padding: 5px;
+  color: black;
+  width: 300px;
+  height: 35px;
+}
+
+
 
 #goHomeDiv{
 background-color: #CC00FF;
