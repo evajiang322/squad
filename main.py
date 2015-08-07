@@ -28,7 +28,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class User(ndb.Model):
     name = ndb.StringProperty()
-    score = ndb.StringProperty()
+    score = ndb.IntegerProperty()
     # points = ndb.IntegerProperty(required=False)
 #
 # class Score(ndb.Model):
@@ -75,7 +75,7 @@ class ScoreboardHandler(webapp2.RequestHandler):
         score = self.request.get('user_score')
         # points = self.request.get('points')
         # user = User(name=name, points=int(points))
-        user = User(name=name, score=score)
+        user = User(name=name, score=int(score))
         user.put()
         self.redirect('/scoreboard')
 
